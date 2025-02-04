@@ -1,8 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# 
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{71A1F94F-DFFA-4BCC-9025-45256F00054F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CivicHub", "src\CivicHub\CivicHub.csproj", "{81D805B0-860D-4374-A4E3-DAB7518A163D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81D805B0-860D-4374-A4E3-DAB7518A163D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81D805B0-860D-4374-A4E3-DAB7518A163D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81D805B0-860D-4374-A4E3-DAB7518A163D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81D805B0-860D-4374-A4E3-DAB7518A163D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{81D805B0-860D-4374-A4E3-DAB7518A163D} = {71A1F94F-DFFA-4BCC-9025-45256F00054F}
 	EndGlobalSection
 EndGlobal
