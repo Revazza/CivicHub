@@ -8,6 +8,11 @@ namespace CivicHub.Domain.Locations;
 public class Location
 {
     /// <summary>
+    /// Gets or sets the unique identifier for the location.
+    /// </summary>
+    public Guid Id { get; set; }
+    
+    /// <summary>
     /// Gets or sets the country code of the location (e.g., "GE" for the Georgia).
     /// </summary>
     public string CountryCode { get; set; } = string.Empty;
