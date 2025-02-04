@@ -13,7 +13,7 @@ public class Person
     /// <summary>
     /// Gets or sets the unique identifier for the person.
     /// </summary>
-    public int Id { get; set; }
+    public long Id { get; set; }
 
     /// <summary>
     /// Gets or sets the first name of the person.
@@ -39,11 +39,6 @@ public class Person
     /// Gets or sets the birthdate of the person.
     /// </summary>
     public DateTime BirthDate { get; set; }
-
-    /// <summary>
-    /// Gets or sets the phone number of the person.
-    /// </summary>
-    public PhoneNumber PhoneNumber { get; set; } = null!;
     
     /// <summary>
     /// Gets or sets the location details of the person.
@@ -51,9 +46,19 @@ public class Person
     public Location Location { get; set; } = null!;
 
     /// <summary>
+    /// Gets or sets the phone number of the person.
+    /// </summary>
+    public List<PhoneNumber> PhoneNumbers { get; set; } = null!;
+    
+    /// <summary>
     /// Gets or sets a list of connections related to the person.
     /// </summary>
     public List<PersonConnection> Connections { get; set; } = [];
+    
+    /// <summary>
+    /// Gets or sets a list of connections related to the person.
+    /// </summary>
+    public List<PersonConnection> ConnectedTo { get; set; } = [];
 
     // TODO: Add person image
 }
