@@ -10,7 +10,7 @@ public record PhoneNumber
     /// <summary>
     /// Gets or sets the phone number as a string.
     /// </summary>
-    public string Number { get; set; }
+    public string Number { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the type of phone number (e.g., Mobile, Home, Work).
