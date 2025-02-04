@@ -31,11 +31,6 @@ public class Person
     public string PersonalNumber { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the type of person (relative, colleague, acquaintance etc.).
-    /// </summary>
-    public string Type { get; set; } = string.Empty;
-
-    /// <summary>
     /// Gets or sets the gender of the person.
     /// </summary>
     public Gender Gender { get; set; }
