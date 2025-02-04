@@ -2,5 +2,7 @@ namespace CivicHub.Application.Repositories;
 
 public interface IUnitOfWork
 {
-    public IPersonRepository PersonRepository { get; }
+    IPersonRepository PersonRepository { get; }
+    
+    Task SaveChangesAsync(CancellationToken cancellationToken = default);
 }

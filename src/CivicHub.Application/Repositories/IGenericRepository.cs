@@ -1,10 +1,10 @@
 namespace CivicHub.Application.Repositories;
 
-public interface IGenericRepository<T, in TId>
-    where T : class
+public interface IGenericRepository<TEntity, in TId>
+    where TEntity : class
 {
-    Task<T?> InsertAsync(T entity);
-    Task<T?> GetByIdAsync(TId id);
-    void Update(T entity);
-    void Delete(T entity);
+    Task InsertAsync(TEntity entity, CancellationToken cancellationToken = default);
+    Task<TEntity?> GetByIdAsync(TId id);
+    void Update(TEntity entity);
+    void Delete(TEntity entity);
 }
