@@ -34,11 +34,10 @@ public class PersonConfigurations : IEntityTypeConfiguration<Person>
                 .IsRequired();
         });
 
-        // The foreign key is managed as a shadow property
         builder.HasOne(x => x.Location)
-            .WithMany(x => x.Population);
+            .WithMany();
 
         builder.HasIndex(x => new { x.FirstName, x.LastName, x.PersonalNumber });
-        builder.HasIndex(x => new { x.FirstName, x.LastName, x.PersonalNumber, x.Location, x.BirthDate });
+        builder.HasIndex(x => new { x.FirstName, x.LastName, x.PersonalNumber, x.Gender, x.BirthDate });
     }
 }
