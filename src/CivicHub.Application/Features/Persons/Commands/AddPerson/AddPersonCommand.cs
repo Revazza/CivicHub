@@ -8,6 +8,7 @@ public record AddPersonCommand(
     string FirstName,
     string LastName,
     string PersonalNumber,
+    string CityCode,
     Gender Gender,
-    DateTime BirthDate,
-    string CityCode) : IRequest<Result<AddPersonResponse>>;
+    DateTime BirthDate
+    ) : IRequest<Result<AddPersonResponse>>;
