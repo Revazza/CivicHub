@@ -1,0 +1,54 @@
+# Rider-specific files
+.idea/
+*.sln.iml
+
+# Visual Studio-specific files
+.vs/
+*.suo
+*.user
+*.cache
+*.csproj.user
+*.sln.docstates
+
+# Build artifacts
+bin/
+obj/
+out/
+*.pdb
+*.dll
+*.exe
+
+# NuGet
+packages/
+*.nupkg
+project.lock.json
+project.assets.json
+.nuget/
+
+# Logs
+logs/
+*.log
+*.tlog
+
+# User-specific settings
+*.swp
+*.bak
+*.tmp
+*.userprefs
+
+# Debugging
+DumpStack.log
+hs_err_pid*
+.vscode/
+
+# Environment-specific
+appsettings.Development.json
+secrets.json
+.env
+
+# Resharper files
+_ReSharper.Caches/
+
+# Temporary files
+Thumbs.db
+desktop.ini
