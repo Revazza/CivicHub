@@ -1,4 +1,4 @@
-using CivicHub.Domain.Locations;
+using CivicHub.Domain.Cities;
 using CivicHub.Domain.Persons;
 using CivicHub.Domain.Persons.Entities.PersonConnections;
 using Microsoft.EntityFrameworkCore;
@@ -10,12 +10,22 @@ public class CivicHubContext(DbContextOptions<CivicHubContext> options) : DbCont
     public const string SectionName = nameof(CivicHubContext);
     public DbSet<Person> Persons { get; set; }
     public DbSet<PersonConnection> PersonConnections { get; set; }
-    public DbSet<Location> Locations { get; set; }
-    
+    public DbSet<City> Cities { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         //Apply all the configurations defined in Configurations folder
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(CivicHubContext).Assembly);
+
+        SeedData(modelBuilder); 
+    }
+
+    private static void SeedData(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<City>().HasData(
+            new City { Name = "Tbilisi", Code = "TB" },
+            new City { Name = "Batumi", Code = "BT" }
+        );
     }
 }

@@ -1,6 +1,6 @@
 using CivicHub.Application.Common.Results;
 using CivicHub.Application.Repositories;
-using CivicHub.Domain.Locations.Exceptions;
+using CivicHub.Domain.Cities.Exceptions;
 using CivicHub.Domain.Persons;
 using CivicHub.Domain.Persons.Exceptions;
 using Mapster;
@@ -10,9 +10,9 @@ using Microsoft.Extensions.Logging;
 namespace CivicHub.Application.Features.Persons.Commands.AddPerson;
 
 public class AddPersonCommandHandler(IUnitOfWork unitOfWork, ILogger<AddPersonCommandHandler> logger)
-    : IRequestHandler<AddPersonCommand, Result<AddPersonResponse>>
+    : IRequestHandler<AddPersonCommand, Result>
 {
-    public async Task<Result<AddPersonResponse>> Handle(AddPersonCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(AddPersonCommand request, CancellationToken cancellationToken)
     {
         logger.LogInformation("Process started to handle {RequestType} for PersonalNumber: {PersonalNumber}",
             nameof(AddPersonCommand), request.PersonalNumber);
@@ -32,13 +32,13 @@ public class AddPersonCommandHandler(IUnitOfWork unitOfWork, ILogger<AddPersonCo
         logger.LogInformation("Process ended to handle {RequestType} for PersonalNumber: {PersonalNumber}",
             nameof(AddPersonCommand), request.PersonalNumber);
 
-        return person.Adapt<AddPersonResponse>();
+        return Result.Success();
     }
 
     private async Task ValidateAsync(AddPersonCommand request, CancellationToken cancellationToken)
     {
         await EnsurePersonDoesntExistAsync(request.PersonalNumber, cancellationToken);
-        await EnsureLocationExistsAsync(request.LocationId, cancellationToken);
+        await EnsureCityExistsAsync(request.CityCode, cancellationToken);
     }
 
     private async Task EnsurePersonDoesntExistAsync(string personalNumber, CancellationToken cancellationToken)
@@ -50,12 +50,12 @@ public class AddPersonCommandHandler(IUnitOfWork unitOfWork, ILogger<AddPersonCo
         }
     }
 
-    private async Task EnsureLocationExistsAsync(Guid locationId, CancellationToken cancellationToken)
+    private async Task EnsureCityExistsAsync(string cityCode, CancellationToken cancellationToken)
     {
-        var exists = await unitOfWork.LocationRepository.DoesExistAsync(locationId, cancellationToken);
+        var exists = await unitOfWork.CityRepository.DoesExistAsync(cityCode, cancellationToken);
         if (!exists)
         {
-            throw new LocationDoesntExistException(locationId);
+            throw new CityDoesntExistException(cityCode);
         }
     }
 }

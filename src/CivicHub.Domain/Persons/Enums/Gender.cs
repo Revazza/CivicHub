@@ -6,6 +6,11 @@ namespace CivicHub.Domain.Persons.Enums;
 public enum Gender
 {
     /// <summary>
+    /// Not specified gender
+    /// </summary>
+    NotSpecified,
+    
+    /// <summary>
     /// Male gender.
     /// </summary>
     Male,

@@ -1,4 +1,4 @@
-using CivicHub.Application.Features.Persons.Commands.AddPerson;
+using CivicHub.Application.Features.Persons.Commands.Common.Dtos;
 using CivicHub.Application.Features.Persons.Commands.Common.Extensions;
 using CivicHub.Domain.Persons.ValueObjects.PhoneNumbers;
 using FluentValidation;

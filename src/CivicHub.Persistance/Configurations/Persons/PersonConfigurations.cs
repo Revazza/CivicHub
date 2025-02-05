@@ -43,9 +43,9 @@ public class PersonConfigurations : IEntityTypeConfiguration<Person>
                 .IsRequired();
         });
 
-        builder.HasOne(x => x.Location)
+        builder.HasOne(x => x.City)
             .WithMany()
-            .HasForeignKey(x => x.LocationId);
+            .HasForeignKey(x => x.CityCode);
 
         builder.HasIndex(x => new { x.FirstName, x.LastName, x.PersonalNumber });
         builder.HasIndex(x => new { x.FirstName, x.LastName, x.PersonalNumber, x.Gender, x.BirthDate });
