@@ -1,4 +1,4 @@
-using CivicHub.Domain.Locations;
+using CivicHub.Domain.Cities;
 using CivicHub.Domain.Persons.Entities.PersonConnections;
 using CivicHub.Domain.Persons.Enums;
 using CivicHub.Domain.Persons.ValueObjects.PhoneNumbers;
@@ -31,9 +31,9 @@ public class Person
     public string PersonalNumber { get; set; } = string.Empty;
         
     /// <summary>
-    /// Gets or sets the location identifier.
+    /// Gets or sets the city identifier.
     /// </summary>
-    public Guid LocationId { get; set; }
+    public string CityCode { get; set; }
     
     /// <summary>
     /// Gets or sets the gender of the person.
@@ -46,9 +46,9 @@ public class Person
     public DateTime BirthDate { get; set; }
     
     /// <summary>
-    /// Gets or sets the location details of the person.
+    /// Gets or sets the city details of the person.
     /// </summary>
-    public Location Location { get; set; } = null!;
+    public City City { get; set; } = null!;
 
     /// <summary>
     /// Gets or sets the phone number of the person.
