@@ -1,7 +1,7 @@
-using CivicHub;
+using CivicHub.Api;
+using CivicHub.Api.Middlewares;
 using CivicHub.Application;
 using CivicHub.Infrastructure;
-using CivicHub.Middlewares;
 using CivicHub.Persistance;
 
 var builder = WebApplication.CreateBuilder(args);

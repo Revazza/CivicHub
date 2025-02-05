@@ -1,6 +1,6 @@
-using CivicHub.Middlewares;
+using CivicHub.Api.Middlewares;
 
-namespace CivicHub;
+namespace CivicHub.Api;
 
 public static class DependencyInjection
 {
