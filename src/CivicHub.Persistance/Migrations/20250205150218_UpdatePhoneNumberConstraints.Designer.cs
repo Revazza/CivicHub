@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CivicHub.Persistance.Migrations
 {
     [DbContext(typeof(CivicHubContext))]
-    [Migration("20250205145122_AddLocationIdToPerson")]
-    partial class AddLocationIdToPerson
+    [Migration("20250205150218_UpdatePhoneNumberConstraints")]
+    partial class UpdatePhoneNumberConstraints
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -164,8 +164,8 @@ namespace CivicHub.Persistance.Migrations
 
                             b1.Property<string>("Number")
                                 .IsRequired()
-                                .HasMaxLength(5)
-                                .HasColumnType("nvarchar(5)");
+                                .HasMaxLength(10)
+                                .HasColumnType("nvarchar(10)");
 
                             b1.Property<int>("Type")
                                 .HasColumnType("int");

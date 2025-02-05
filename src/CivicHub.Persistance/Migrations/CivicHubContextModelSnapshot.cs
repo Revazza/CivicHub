@@ -161,8 +161,8 @@ namespace CivicHub.Persistance.Migrations
 
                             b1.Property<string>("Number")
                                 .IsRequired()
-                                .HasMaxLength(5)
-                                .HasColumnType("nvarchar(5)");
+                                .HasMaxLength(10)
+                                .HasColumnType("nvarchar(10)");
 
                             b1.Property<int>("Type")
                                 .HasColumnType("int");

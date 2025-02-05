@@ -16,6 +16,8 @@ public class AddPersonCommandHandler(IUnitOfWork unitOfWork)
         await ValidateAsync(request, cancellationToken);
         var person = ConvertToPerson(request);
         await unitOfWork.PersonRepository.InsertAsync(person, cancellationToken);
+
+        await unitOfWork.SaveChangesAsync(cancellationToken);
         return new AddPersonResponse();
     }
 

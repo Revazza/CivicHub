@@ -5,7 +5,7 @@
 namespace CivicHub.Persistance.Migrations
 {
     /// <inheritdoc />
-    public partial class AddLocationIdToPerson : Migration
+    public partial class UpdatePhoneNumberConstraints : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -13,8 +13,8 @@ namespace CivicHub.Persistance.Migrations
             migrationBuilder.AlterColumn<string>(
                 name: "Number",
                 table: "PhoneNumber",
-                type: "nvarchar(5)",
-                maxLength: 5,
+                type: "nvarchar(10)",
+                maxLength: 10,
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(15)",
@@ -55,8 +55,8 @@ namespace CivicHub.Persistance.Migrations
                 maxLength: 15,
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(5)",
-                oldMaxLength: 5);
+                oldType: "nvarchar(10)",
+                oldMaxLength: 10);
         }
     }
 }
