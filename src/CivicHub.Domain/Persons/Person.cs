@@ -29,7 +29,12 @@ public class Person
     /// Gets or sets the personal identification number of the person.
     /// </summary>
     public string PersonalNumber { get; set; } = string.Empty;
-
+        
+    /// <summary>
+    /// Gets or sets the location identifier.
+    /// </summary>
+    public Guid LocationId { get; set; }
+    
     /// <summary>
     /// Gets or sets the gender of the person.
     /// </summary>

@@ -1,5 +1,3 @@
-using CivicHub.Domain.Persons;
-
 namespace CivicHub.Domain.Locations;
 
 /// <summary>

@@ -8,6 +8,7 @@ public record AddPersonCommand(
     string FirstName,
     string LastName,
     string PersonalNumber,
+    Guid LocationId,
     Gender Gender,
     DateTime BirthDate,
-    string CityCode) : IRequest<Result<AddPersonResponse>>;
+    List<PhoneNumberDto> PhoneNumbers) : IRequest<Result<AddPersonResponse>>;

@@ -10,6 +10,12 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.12" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3"/>
+    
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CivicHub.Infrastructure\CivicHub.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

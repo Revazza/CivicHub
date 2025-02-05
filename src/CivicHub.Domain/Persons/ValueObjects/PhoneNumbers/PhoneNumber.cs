@@ -8,6 +8,16 @@ namespace CivicHub.Domain.Persons.ValueObjects.PhoneNumbers;
 public record PhoneNumber
 {
     /// <summary>
+    /// Gets or sets the country code for phone number.
+    /// </summary>
+    public string CountryCode { get; set; } = string.Empty;
+    
+    /// <summary>
+    /// Gets or sets the phone number prefix.
+    /// </summary>
+    public string AreaCode { get; set; } = string.Empty;
+    
+    /// <summary>
     /// Gets or sets the phone number as a string.
     /// </summary>
     public string Number { get; set; } = string.Empty;

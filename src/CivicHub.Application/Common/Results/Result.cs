@@ -2,30 +2,24 @@ namespace CivicHub.Application.Common.Results;
 
 public class Result
 {
-    public bool IsSuccess { get; }
+    public List<Error> Errors { get; }
 
-    public bool IsFailure => !IsSuccess;
-    
-    protected internal Result(string errorMessage)
+    protected internal Result(List<Error> errors)
     {
-        IsSuccess = false;
-        ErrorMessage = errorMessage;
+        Errors = errors;
+    }
+    
+    protected internal Result(Error error)
+    {
+        Errors = [error];
     }
 
     protected internal Result()
     {
-        IsSuccess = true;
-        ErrorMessage = string.Empty;
+        Errors = [];
     }
 
-    public string ErrorMessage { get; }
-
-    public static Result Success() => new();
-
-    public static Result<TValue> Success<TValue>(TValue value) => new(value);
-
-    public static Result<TValue> Failure<TValue>(string errorMessage) => new(errorMessage);
-
-    public static implicit operator Result(string errorMessage) => new(errorMessage);
-
+    public static implicit operator Result(List<Error> errors) => new(errors);
+    
+    public static implicit operator Result(Error error) => new(error);
 }
