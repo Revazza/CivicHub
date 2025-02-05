@@ -4,7 +4,7 @@ public interface IUnitOfWork
 {
     IPersonRepository PersonRepository { get; }
     
-    ILocationRepository LocationRepository { get; }
+    ICityRepository CityRepository { get; }
     
     Task SaveChangesAsync(CancellationToken cancellationToken = default);
 }

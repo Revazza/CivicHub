@@ -7,21 +7,21 @@ public class UnitOfWork : IUnitOfWork
 {
     private readonly CivicHubContext _context;
     private readonly Lazy<IPersonRepository> _personRepository;
-    private readonly Lazy<ILocationRepository> _locationRepository;
+    private readonly Lazy<ICityRepository> _cityRepository;
 
     public UnitOfWork(
         CivicHubContext context,
         Lazy<IPersonRepository> personRepository,
-        Lazy<ILocationRepository> locationRepository)
+        Lazy<ICityRepository> cityRepository)
     {
         _context = context;
         _personRepository = personRepository;
-        _locationRepository = locationRepository;
+        _cityRepository = cityRepository;
     }
 
     public IPersonRepository PersonRepository => _personRepository.Value;
 
-    public ILocationRepository LocationRepository => _locationRepository.Value;
+    public ICityRepository CityRepository => _cityRepository.Value;
 
     public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
         => await _context.SaveChangesAsync(cancellationToken);

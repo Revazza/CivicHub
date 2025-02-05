@@ -16,7 +16,7 @@ public static class DependencyInjection
     private static void AddRepositories(this IServiceCollection services)
     {
         services.AddLazyRepository<IPersonRepository, PersonRepository>();
-        services.AddLazyRepository<ILocationRepository, LocationRepository>();
+        services.AddLazyRepository<ICityRepository, CityRepository>();
         services.AddScoped<IPersonRepository, PersonRepository>();
     }
 
