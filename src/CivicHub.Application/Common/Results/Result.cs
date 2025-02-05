@@ -1,7 +1,11 @@
+using CivicHub.Application.Common.Extensions;
+
 namespace CivicHub.Application.Common.Results;
 
 public class Result
 {
+    public bool IsSuccess => Errors.IsEmpty();
+    
     public List<Error> Errors { get; }
 
     protected internal Result(List<Error> errors)
