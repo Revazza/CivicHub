@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using CivicHub.Application.Features.Persons.Commands.Common.Extensions;
 using CivicHub.Domain.Persons;
 using FluentValidation;
 
@@ -6,15 +7,14 @@ namespace CivicHub.Application.Features.Persons.Commands.Common.Validators;
 
 public class PersonalNumberValidator : AbstractValidator<string>
 {
+    private const string PropertyName = nameof(Person.PersonalNumber);
+    
     public PersonalNumberValidator()
     {
         RuleFor(personalNumber => personalNumber)
             .NotEmpty()
-            .WithName(nameof(Person.PersonalNumber))
+            .WithName(PropertyName)
             .Length(PersonConstraints.PersonalNumberLength)
-            .Must(HasOnlyDigits)
-            .WithMessage($"{nameof(Person.PersonalNumber)} is invalid");
+            .MustContainOnlyDigits(PropertyName);
     }
-
-    private static bool HasOnlyDigits(string personalNumber) => Regex.IsMatch(personalNumber, @"^\d{11}$");
 }

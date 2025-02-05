@@ -18,5 +18,8 @@ public class AddPersonCommandValidator : AbstractValidator<AddPersonCommand>
 
         RuleFor(person => person.BirthDate)
             .SetValidator(new AgeValidator());
+        
+        RuleForEach(person => person.PhoneNumbers)
+            .SetValidator(new PhoneNumberDtoValidator());
     }
 }

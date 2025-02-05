@@ -10,5 +10,5 @@ public record AddPersonCommand(
     string PersonalNumber,
     string CityCode,
     Gender Gender,
-    DateTime BirthDate
-    ) : IRequest<Result<AddPersonResponse>>;
+    DateTime BirthDate,
+    List<PhoneNumberDto> PhoneNumbers) : IRequest<Result<AddPersonResponse>>;
