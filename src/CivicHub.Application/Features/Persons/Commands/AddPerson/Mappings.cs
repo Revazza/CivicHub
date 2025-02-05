@@ -11,7 +11,9 @@ public class Mappings : IRegister
     {
         config
             .NewConfig<Person, AddPersonResponse>()
-            .Map(dest => dest.FullName, src => $"{src.FirstName} {src.LastName}");
+            .Map(dest => dest.FullName, src => $"{src.FirstName} {src.LastName}")
+            .Map(dest => dest.BirthDate, src => src.BirthDate.ToLongDateString())
+            .Map(dest => dest.Gender, src => src.Gender.ToString());
 
         config
             .NewConfig<AddPersonCommand, Person>()
