@@ -1,4 +1,5 @@
 using CivicHub.Domain.Persons;
+using CivicHub.Domain.Persons.ValueObjects.PhoneNumbers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -29,8 +30,16 @@ public class PersonConfigurations : IEntityTypeConfiguration<Person>
 
         builder.OwnsMany(x => x.PhoneNumbers, phone =>
         {
+            phone.Property(p => p.CountryCode)
+                .HasMaxLength(PhoneNumberConstraints.MaxCountryCodeLength)
+                .IsRequired();
+            
+            phone.Property(p => p.AreaCode)
+                .HasMaxLength(PhoneNumberConstraints.MaxAreaCodeLength)
+                .IsRequired();
+            
             phone.Property(p => p.Number)
-                .HasMaxLength(15)
+                .HasMaxLength(PhoneNumberConstraints.MaxNumberLength)
                 .IsRequired();
         });
 
