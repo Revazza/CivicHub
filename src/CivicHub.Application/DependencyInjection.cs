@@ -1,6 +1,8 @@
 using System.Reflection;
 using CivicHub.Application.Behaviours;
 using FluentValidation;
+using Mapster;
+using MapsterMapper;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +16,8 @@ public static class DependencyInjection
             typeof(IPipelineBehavior<,>),
             typeof(ValidationPipelineBehaviour<,>));
 
+        TypeAdapterConfig.GlobalSettings.Scan(Assembly.GetExecutingAssembly());
+        
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
         return services;

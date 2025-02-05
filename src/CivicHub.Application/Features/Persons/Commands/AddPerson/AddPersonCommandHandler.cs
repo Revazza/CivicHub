@@ -4,6 +4,7 @@ using CivicHub.Domain.Locations.Exceptions;
 using CivicHub.Domain.Persons;
 using CivicHub.Domain.Persons.Exceptions;
 using CivicHub.Domain.Persons.ValueObjects.PhoneNumbers;
+using Mapster;
 using MediatR;
 
 namespace CivicHub.Application.Features.Persons.Commands.AddPerson;
@@ -16,9 +17,10 @@ public class AddPersonCommandHandler(IUnitOfWork unitOfWork)
         await ValidateAsync(request, cancellationToken);
         var person = ConvertToPerson(request);
         await unitOfWork.PersonRepository.InsertAsync(person, cancellationToken);
-
         await unitOfWork.SaveChangesAsync(cancellationToken);
-        return new AddPersonResponse();
+        // Todo:
+        // Capitalize firstname and lastname
+        return person.Adapt<AddPersonResponse>();
     }
 
     private async Task ValidateAsync(AddPersonCommand request, CancellationToken cancellationToken)
