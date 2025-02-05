@@ -1,6 +1,5 @@
 using CivicHub.Application.Common.Results;
 using FluentValidation;
-using FluentValidation.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -11,11 +10,11 @@ public class ValidationPipelineBehaviour<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
 {
     private readonly ILogger<ValidationPipelineBehaviour<TRequest, TResponse>> _logger;
-    private readonly IValidator<TRequest>? _validator;
+    private readonly IValidator<TRequest> _validator;
 
     public ValidationPipelineBehaviour(
         ILogger<ValidationPipelineBehaviour<TRequest, TResponse>> logger,
-        IValidator<TRequest>? validator = null)
+        IValidator<TRequest> validator = null)
     {
         _logger = logger;
         _validator = validator;

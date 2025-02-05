@@ -2,11 +2,17 @@ using System.Net;
 using CivicHub.Application.Common.Results;
 using CivicHub.Domain.Common.Exceptions;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
-namespace CivicHub.Middlewares;
+namespace CivicHub.Api.Middlewares;
 
 public class GlobalExceptionLoggingMiddleware(ILogger<GlobalExceptionLoggingMiddleware> logger) : IMiddleware
 {
+    private static readonly JsonSerializerSettings JsonSettings = new()
+    {
+        ContractResolver = new CamelCasePropertyNamesContractResolver()
+    };
+    
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
         try
@@ -15,8 +21,9 @@ public class GlobalExceptionLoggingMiddleware(ILogger<GlobalExceptionLoggingMidd
         }
         catch (DomainException ex)
         {
-            logger.LogWarning(ex, "Domain validation error occured while processing the request: {ErrorMessage}", ex.Message);
-            
+            logger.LogWarning(ex, "Domain validation error occured while processing the request: {ErrorMessage}"
+                , ex.Message);
+
             await WriteDomainExceptionResponseAsync(ex, context);
         }
         catch (Exception ex)
@@ -48,7 +55,7 @@ public class GlobalExceptionLoggingMiddleware(ILogger<GlobalExceptionLoggingMidd
     private static async Task WriteResponseAsync(ErrorType errorType, Exception ex, HttpContext context)
     {
         var response = Result.Failure(new Error(ex.Message, errorType));
-        var responseJson = JsonConvert.SerializeObject(response);
+        var responseJson = JsonConvert.SerializeObject(response, JsonSettings);
         await context.Response.WriteAsync(responseJson);
     }
 }

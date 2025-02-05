@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using CivicHub.Application.Common.Extensions;
 
 namespace CivicHub.Application.Common.Results;
