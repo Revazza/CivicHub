@@ -11,4 +11,11 @@ public class PersonRepository(CivicHubContext context) :
 {
     public async Task<bool> DoesExistAsync(string personalNumber, CancellationToken cancellationToken = default)
         => await _context.Persons.AnyAsync(x => x.PersonalNumber == personalNumber, cancellationToken);
+
+    public async Task<Person> GetForUpdateAsync(string personalNumber,
+        CancellationToken cancellationToken = default)
+        => await _context
+            .Persons
+            .Include(x => x.PhoneNumbers)
+            .FirstOrDefaultAsync(x => x.PersonalNumber == personalNumber, cancellationToken);
 }
