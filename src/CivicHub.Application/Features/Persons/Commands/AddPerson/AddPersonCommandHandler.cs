@@ -3,23 +3,35 @@ using CivicHub.Application.Repositories;
 using CivicHub.Domain.Locations.Exceptions;
 using CivicHub.Domain.Persons;
 using CivicHub.Domain.Persons.Exceptions;
-using CivicHub.Domain.Persons.ValueObjects.PhoneNumbers;
 using Mapster;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace CivicHub.Application.Features.Persons.Commands.AddPerson;
 
-public class AddPersonCommandHandler(IUnitOfWork unitOfWork)
+public class AddPersonCommandHandler(IUnitOfWork unitOfWork, ILogger<AddPersonCommandHandler> logger)
     : IRequestHandler<AddPersonCommand, Result<AddPersonResponse>>
 {
     public async Task<Result<AddPersonResponse>> Handle(AddPersonCommand request, CancellationToken cancellationToken)
     {
+        logger.LogInformation("Process started to handle {RequestType} for PersonalNumber: {PersonalNumber}",
+            nameof(AddPersonCommand), request.PersonalNumber);
+
         await ValidateAsync(request, cancellationToken);
-        var person = ConvertToPerson(request);
+
+        var person = request.Adapt<Person>();
+
+        logger.LogInformation("Person with PersonalNumber: {PersonalNumber} is being inserted", request.PersonalNumber);
+
         await unitOfWork.PersonRepository.InsertAsync(person, cancellationToken);
         await unitOfWork.SaveChangesAsync(cancellationToken);
-        // Todo:
-        // Capitalize firstname and lastname
+
+        logger.LogInformation("Person with PersonalNumber: {PersonalNumber} successfully added",
+            request.PersonalNumber);
+
+        logger.LogInformation("Process ended to handle {RequestType} for PersonalNumber: {PersonalNumber}",
+            nameof(AddPersonCommand), request.PersonalNumber);
+
         return person.Adapt<AddPersonResponse>();
     }
 
@@ -46,28 +58,4 @@ public class AddPersonCommandHandler(IUnitOfWork unitOfWork)
             throw new LocationDoesntExistException(locationId);
         }
     }
-
-    private static Person ConvertToPerson(AddPersonCommand request)
-        => new()
-        {
-            FirstName = request.FirstName,
-            LastName = request.LastName,
-            PersonalNumber = request.PersonalNumber,
-            Gender = request.Gender,
-            BirthDate = request.BirthDate,
-            LocationId = request.LocationId,
-            PhoneNumbers = ConvertToPhoneNumbers(request.PhoneNumbers),
-            ConnectedTo = [],
-            Connections = [],
-        };
-
-    private static List<PhoneNumber> ConvertToPhoneNumbers(List<PhoneNumberDto> phoneNumbers)
-        => phoneNumbers
-            .Select(phoneNumber => new PhoneNumber
-            {
-                CountryCode = phoneNumber.CountryCode,
-                AreaCode = phoneNumber.AreaCode,
-                Number = phoneNumber.Number,
-                Type = phoneNumber.Type,
-            }).ToList();
 }
