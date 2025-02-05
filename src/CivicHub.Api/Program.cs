@@ -1,5 +1,7 @@
+using CivicHub;
 using CivicHub.Application;
 using CivicHub.Infrastructure;
+using CivicHub.Middlewares;
 using CivicHub.Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services
+    .AddApi()
     .AddApplication()
     .AddInfrastructure()
     .AddPersistance(builder.Configuration);
@@ -21,8 +24,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<GlobalExceptionLoggingMiddleware>();
 app.UseHttpsRedirection();
-
 app.MapControllers();
 
 app.Run();
