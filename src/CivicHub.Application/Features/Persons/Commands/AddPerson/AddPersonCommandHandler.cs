@@ -10,9 +10,9 @@ using Microsoft.Extensions.Logging;
 namespace CivicHub.Application.Features.Persons.Commands.AddPerson;
 
 public class AddPersonCommandHandler(IUnitOfWork unitOfWork, ILogger<AddPersonCommandHandler> logger)
-    : IRequestHandler<AddPersonCommand, Result<AddPersonResponse>>
+    : IRequestHandler<AddPersonCommand, Result>
 {
-    public async Task<Result<AddPersonResponse>> Handle(AddPersonCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(AddPersonCommand request, CancellationToken cancellationToken)
     {
         logger.LogInformation("Process started to handle {RequestType} for PersonalNumber: {PersonalNumber}",
             nameof(AddPersonCommand), request.PersonalNumber);
@@ -32,7 +32,7 @@ public class AddPersonCommandHandler(IUnitOfWork unitOfWork, ILogger<AddPersonCo
         logger.LogInformation("Process ended to handle {RequestType} for PersonalNumber: {PersonalNumber}",
             nameof(AddPersonCommand), request.PersonalNumber);
 
-        return person.Adapt<AddPersonResponse>();
+        return Result.Success();
     }
 
     private async Task ValidateAsync(AddPersonCommand request, CancellationToken cancellationToken)

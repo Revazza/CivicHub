@@ -13,9 +13,9 @@ using Microsoft.Extensions.Logging;
 namespace CivicHub.Application.Features.Persons.Commands.UpdatePerson;
 
 public class UpdatePersonCommandHandler(IUnitOfWork unitOfWork, ILogger<UpdatePersonCommandHandler> logger)
-    : IRequestHandler<UpdatePersonCommand, Result<UpdatePersonResponse>>
+    : IRequestHandler<UpdatePersonCommand, Result>
 {
-    public async Task<Result<UpdatePersonResponse>> Handle(UpdatePersonCommand request,
+    public async Task<Result> Handle(UpdatePersonCommand request,
         CancellationToken cancellationToken)
     {
         var person = await unitOfWork
@@ -27,7 +27,7 @@ public class UpdatePersonCommandHandler(IUnitOfWork unitOfWork, ILogger<UpdatePe
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return new UpdatePersonResponse();
+        return Result.Success();
     }
 
     private async Task UpdateAsync(Person person, UpdatePersonCommand request, CancellationToken cancellationToken)

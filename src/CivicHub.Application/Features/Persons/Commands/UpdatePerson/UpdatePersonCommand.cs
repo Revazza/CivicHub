@@ -12,4 +12,4 @@ public record UpdatePersonCommand(
     string CityCode,
     Gender Gender,
     DateTime BirthDate,
-    List<PhoneNumberDto> PhoneNumbers) : IRequest<Result<UpdatePersonResponse>>;
+    List<PhoneNumberDto> PhoneNumbers) : IRequest<Result>;
