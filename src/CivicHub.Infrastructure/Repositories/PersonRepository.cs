@@ -4,10 +4,8 @@ using CivicHub.Persistance.Contexts.CivicHubContexts;
 
 namespace CivicHub.Infrastructure.Repositories;
 
-public class PersonRepository : GenericRepository<Person, int>, IPersonRepository
+public class PersonRepository(CivicHubContext context)
+    : GenericRepository<Person, int>(context), IPersonRepository
 {
-    public PersonRepository(CivicHubContext context) : base(context.Persons)
-    {
-        
-    }
+    
 }
