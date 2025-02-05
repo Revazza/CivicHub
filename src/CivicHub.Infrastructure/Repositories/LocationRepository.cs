@@ -9,6 +9,6 @@ public class LocationRepository(CivicHubContext hubContext) :
     GenericRepository<Location, Guid>(hubContext),
     ILocationRepository
 {
-    public async Task<bool> DoesExistAsync(Guid id)
-        => await _context.Locations.AnyAsync(x => x.Id == id);
+    public async Task<bool> DoesExistAsync(Guid id, CancellationToken cancellationToken = default)
+        => await _context.Locations.AnyAsync(x => x.Id == id, cancellationToken);
 }
