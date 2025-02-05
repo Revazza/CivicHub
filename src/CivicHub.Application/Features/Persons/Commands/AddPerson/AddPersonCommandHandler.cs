@@ -1,6 +1,6 @@
 using CivicHub.Application.Common.Results;
 using CivicHub.Application.Repositories;
-using CivicHub.Domain.Locations.Exceptions;
+using CivicHub.Domain.Cities.Exceptions;
 using CivicHub.Domain.Persons;
 using CivicHub.Domain.Persons.Exceptions;
 using Mapster;
@@ -38,7 +38,7 @@ public class AddPersonCommandHandler(IUnitOfWork unitOfWork, ILogger<AddPersonCo
     private async Task ValidateAsync(AddPersonCommand request, CancellationToken cancellationToken)
     {
         await EnsurePersonDoesntExistAsync(request.PersonalNumber, cancellationToken);
-        await EnsureLocationExistsAsync(request.LocationId, cancellationToken);
+        await EnsureCityExistsAsync(request.CityCode, cancellationToken);
     }
 
     private async Task EnsurePersonDoesntExistAsync(string personalNumber, CancellationToken cancellationToken)
@@ -50,12 +50,12 @@ public class AddPersonCommandHandler(IUnitOfWork unitOfWork, ILogger<AddPersonCo
         }
     }
 
-    private async Task EnsureLocationExistsAsync(Guid locationId, CancellationToken cancellationToken)
+    private async Task EnsureCityExistsAsync(string cityCode, CancellationToken cancellationToken)
     {
-        var exists = await unitOfWork.LocationRepository.DoesExistAsync(locationId, cancellationToken);
+        var exists = await unitOfWork.CityRepository.DoesExistAsync(cityCode, cancellationToken);
         if (!exists)
         {
-            throw new LocationDoesntExistException(locationId);
+            throw new CityDoesntExistException(cityCode);
         }
     }
 }
