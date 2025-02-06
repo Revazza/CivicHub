@@ -7,7 +7,7 @@ public static class ValidatorExtensions
 {
     private const char Separator = ' ';
     private const string EnglishOrGeorgianPattern = @"^([a-zA-Z\s]+|[ა-ჰ\s]+)$";
-    private const string EnglishPattern = @"^[a-zA-Z\s]+$";
+    private const string EnglishPattern = "^[a-zA-Z]+$";
     private const string OnlyDigitsPattern = @"^\d+$";
 
     public static IRuleBuilderOptions<T, string> MustBeEnglish<T>(
