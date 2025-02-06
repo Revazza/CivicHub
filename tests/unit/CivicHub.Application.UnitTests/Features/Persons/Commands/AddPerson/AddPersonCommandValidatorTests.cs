@@ -3,6 +3,7 @@ using CivicHub.Application.Features.Persons.Commands.AddPerson;
 using CivicHub.Application.Features.Persons.Commands.Common.Dtos;
 using CivicHub.Domain.Persons;
 using CivicHub.Domain.Persons.ValueObjects.PhoneNumbers.Enums;
+using FluentValidation.Results;
 using NUnit.Framework;
 
 namespace CivicHub.Application.UnitTests.Features.Persons.Commands.AddPerson;
@@ -45,10 +46,7 @@ public class AddPersonCommandValidatorTests
         Assert.Multiple(() =>
         {
             Assert.That(result.IsValid, Is.False);
-            var errorMessage = result
-                .Errors
-                .FirstOrDefault(validationFailure =>
-                    validationFailure.PropertyName.Contains(nameof(Person.FirstName)))?.ErrorMessage;
+            var errorMessage = FindErrorMessage(nameof(Person.FirstName), result);
             Assert.That(errorMessage, Is.Not.Null);
         });
     }
@@ -78,10 +76,7 @@ public class AddPersonCommandValidatorTests
         Assert.Multiple(() =>
         {
             Assert.That(result.IsValid, Is.False);
-            var errorMessage = result
-                .Errors
-                .FirstOrDefault(validationFailure =>
-                    validationFailure.PropertyName.Contains(nameof(Person.LastName)))?.ErrorMessage;
+            var errorMessage = FindErrorMessage(nameof(Person.LastName), result);
             Assert.That(errorMessage, Is.Not.Null);
         });
     }
@@ -112,10 +107,7 @@ public class AddPersonCommandValidatorTests
         Assert.Multiple(() =>
         {
             Assert.That(result.IsValid, Is.False);
-            var errorMessage = result
-                .Errors
-                .FirstOrDefault(validationFailure =>
-                    validationFailure.PropertyName.Contains(nameof(Person.PersonalNumber)))?.ErrorMessage;
+            var errorMessage = FindErrorMessage(nameof(Person.PersonalNumber), result);
             Assert.That(errorMessage, Is.Not.Null);
         });
     }
@@ -137,10 +129,7 @@ public class AddPersonCommandValidatorTests
         Assert.Multiple(() =>
         {
             Assert.That(result.IsValid, Is.False);
-            var errorMessage = result
-                .Errors
-                .FirstOrDefault(validationFailure =>
-                    validationFailure.PropertyName.Contains(nameof(Person.BirthDate)))?.ErrorMessage;
+            var errorMessage = FindErrorMessage(nameof(Person.BirthDate), result);
             Assert.That(errorMessage, Is.Not.Null);
         });
     }
@@ -168,10 +157,7 @@ public class AddPersonCommandValidatorTests
         Assert.Multiple(() =>
         {
             Assert.That(result.IsValid, Is.False);
-            var errorMessage = result
-                .Errors
-                .FirstOrDefault(validationFailure =>
-                    validationFailure.PropertyName.Contains(nameof(Person.CityCode)))?.ErrorMessage;
+            var errorMessage = FindErrorMessage(nameof(Person.CityCode), result);
             Assert.That(errorMessage, Is.Not.Null);
         });
     }
@@ -194,14 +180,11 @@ public class AddPersonCommandValidatorTests
         Assert.Multiple(() =>
         {
             Assert.That(result.IsValid, Is.False);
-            var errorMessage = result
-                .Errors
-                .FirstOrDefault(validationFailure =>
-                    validationFailure.PropertyName.Contains(nameof(Person.CityCode)))?.ErrorMessage;
+            var errorMessage = FindErrorMessage(nameof(PhoneNumberDto.CountryCode), result);
             Assert.That(errorMessage, Is.Not.Null);
         });
     }
-    
+
     [TestCase("")]
     [TestCase("  ")]
     [TestCase("a")]
@@ -220,14 +203,11 @@ public class AddPersonCommandValidatorTests
         Assert.Multiple(() =>
         {
             Assert.That(result.IsValid, Is.False);
-            var errorMessage = result
-                .Errors
-                .FirstOrDefault(validationFailure =>
-                    validationFailure.PropertyName.Contains(nameof(Person.CityCode)))?.ErrorMessage;
+            var errorMessage = FindErrorMessage(nameof(PhoneNumberDto.AreaCode), result);
             Assert.That(errorMessage, Is.Not.Null);
         });
     }
-    
+
     [TestCase("")]
     [TestCase("  ")]
     [TestCase("a")]
@@ -247,10 +227,7 @@ public class AddPersonCommandValidatorTests
         Assert.Multiple(() =>
         {
             Assert.That(result.IsValid, Is.False);
-            var errorMessage = result
-                .Errors
-                .FirstOrDefault(validationFailure =>
-                    validationFailure.PropertyName.Contains(nameof(Person.CityCode)))?.ErrorMessage;
+            var errorMessage = FindErrorMessage(nameof(PhoneNumberDto.Number), result);
             Assert.That(errorMessage, Is.Not.Null);
         });
     }
@@ -274,4 +251,10 @@ public class AddPersonCommandValidatorTests
         // Assert
         Assert.That(result.IsValid, Is.True);
     }
+
+    private static string FindErrorMessage(string propertyName, ValidationResult validationResult)
+        => validationResult
+            .Errors
+            .FirstOrDefault(validationFailure =>
+                validationFailure.PropertyName.Contains(propertyName))?.ErrorMessage;
 }
