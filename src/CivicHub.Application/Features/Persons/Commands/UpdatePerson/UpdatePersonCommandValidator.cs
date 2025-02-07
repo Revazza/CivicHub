@@ -26,10 +26,10 @@ public class UpdatePersonCommandValidator : AbstractValidator<UpdatePersonComman
 
         RuleFor(person => person.CityCode)
             .SetValidator(new CityCodeValidator())
-            .When(person => person.FirstName.IsNotNullOrEmpty());
+            .When(person => person.CityCode.IsNotNullOrEmpty());
 
         RuleForEach(person => person.PhoneNumbers)
             .SetValidator(new PhoneNumberDtoValidator())
-            .When(person => person.PhoneNumbers.IsNotEmpty());
+            .When(person => person.PhoneNumbers.IsNotNullOrEmpty());
     }
 }
