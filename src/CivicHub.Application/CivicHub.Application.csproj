@@ -13,5 +13,9 @@
   <ItemGroup>
     <ProjectReference Include="..\CivicHub.Domain\CivicHub.Domain.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Features\PersonConnections\Commands\" />
+  </ItemGroup>
 
 </Project>
