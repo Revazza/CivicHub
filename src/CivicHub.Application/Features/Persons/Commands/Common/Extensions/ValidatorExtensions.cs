@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using CivicHub.Application.Common.Extensions;
 using FluentValidation;
 
 namespace CivicHub.Application.Features.Persons.Commands.Common.Extensions;
@@ -7,7 +8,7 @@ public static class ValidatorExtensions
 {
     private const char Separator = ' ';
     private const string EnglishOrGeorgianPattern = @"^([a-zA-Z\s]+|[ა-ჰ\s]+)$";
-    private const string EnglishPattern = @"^[a-zA-Z\s]+$";
+    private const string EnglishPattern = "^[a-zA-Z]+$";
     private const string OnlyDigitsPattern = @"^\d+$";
 
     public static IRuleBuilderOptions<T, string> MustBeEnglish<T>(
@@ -35,7 +36,7 @@ public static class ValidatorExtensions
         => ruleBuilder.Must(HasOnlyDigits)
             .WithMessage("{PropertyName} should contain only digits");
 
-    private static bool HasExactlyOneWord(string lastname) => lastname.Split(Separator).Length == 1;
+    private static bool HasExactlyOneWord(string input) => input.IsNotNullOrEmpty() && input.Split(Separator).Length == 1;
 
-    private static bool HasOnlyDigits(string personalNumber) => Regex.IsMatch(personalNumber, OnlyDigitsPattern);
+    private static bool HasOnlyDigits(string input) => input.IsNotNullOrEmpty() && Regex.IsMatch(input, OnlyDigitsPattern);
 }

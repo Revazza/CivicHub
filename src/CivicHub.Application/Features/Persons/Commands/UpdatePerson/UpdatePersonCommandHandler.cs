@@ -113,7 +113,7 @@ public class UpdatePersonCommandHandler(IUnitOfWork unitOfWork, ILogger<UpdatePe
 
     private void UpdateGenderIfSpecified(Person person, Gender gender)
     {
-        if (gender != Gender.NotSpecified || person.Gender == gender)
+        if (gender == Gender.NotSpecified || person.Gender == gender)
         {
             return;
         }
