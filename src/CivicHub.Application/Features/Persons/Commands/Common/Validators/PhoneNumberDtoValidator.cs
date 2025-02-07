@@ -14,13 +14,13 @@ public class PhoneNumberDtoValidator : AbstractValidator<PhoneNumberDto>
             .MinimumLength(PhoneNumberConstraints.MinCountryCodeLength)
             .MaximumLength(PhoneNumberConstraints.MaxCountryCodeLength)
             .MustContainOnlyDigits();
-                
+
         RuleFor(phone => phone.AreaCode)
             .NotEmpty()
             .MinimumLength(PhoneNumberConstraints.MinAreaCodeLength)
             .MaximumLength(PhoneNumberConstraints.MaxAreaCodeLength)
             .MustContainOnlyDigits();
-        
+
         RuleFor(phone => phone.Number)
             .NotEmpty()
             .MinimumLength(PhoneNumberConstraints.MinNumberLength)

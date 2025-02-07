@@ -1,4 +1,6 @@
 using AutoFixture;
+using AutoFixture.Dsl;
+using CivicHub.Application.Common.Extensions;
 using CivicHub.Application.Features.Persons.Commands.AddPerson;
 using CivicHub.Application.Features.Persons.Commands.Common.Dtos;
 using CivicHub.Domain.Persons;
@@ -13,12 +15,36 @@ public class AddPersonCommandValidatorTests
 {
     private AddPersonCommandValidator _validator;
     private Fixture _fixture;
+    private IPostprocessComposer<AddPersonCommand> _validCommandComposer;
 
     [SetUp]
     public void SetUp()
     {
         _fixture = new Fixture();
         _validator = new AddPersonCommandValidator();
+
+        // Update composer only in the test methods
+        _validCommandComposer = _fixture.Build<AddPersonCommand>()
+            .With(c => c.FirstName, "John")
+            .With(c => c.LastName, "Doe")
+            .With(c => c.PersonalNumber, "11111111111")
+            .With(c => c.BirthDate, new DateTime(2000, 01, 01))
+            .With(c => c.CityCode, "TB")
+            .With(c => c.PhoneNumbers, [new PhoneNumberDto("995", "568", "117764", PhoneType.Home)]);
+    }
+
+    [Order(0)]
+    [Test]
+    public void When_ValidCommand_Then_ValidationSucceeds()
+    {
+        // Arrange
+        var command = _validCommandComposer.Create();
+
+        // Act
+        var result = _validator.Validate(command);
+
+        // Assert
+        Assert.That(result.IsValid, Is.True);
     }
 
     [TestCase("")]
@@ -35,7 +61,7 @@ public class AddPersonCommandValidatorTests
     public void When_FirstNameIsInvalid_Then_ValidationFails(string invalidFirstName)
     {
         // Arrange
-        var command = _fixture.Build<AddPersonCommand>()
+        var command = _validCommandComposer
             .With(c => c.FirstName, invalidFirstName)
             .Create();
 
@@ -65,7 +91,7 @@ public class AddPersonCommandValidatorTests
     public void When_LastNameIsInvalid_Then_ValidationFails(string lastName)
     {
         // Arrange
-        var command = _fixture.Build<AddPersonCommand>()
+        var command = _validCommandComposer
             .With(c => c.LastName, lastName)
             .Create();
 
@@ -96,7 +122,7 @@ public class AddPersonCommandValidatorTests
     public void When_PersonalNumberIsInvalid_Then_ValidationFails(string invalidPersonalNumber)
     {
         // Arrange
-        var command = _fixture.Build<AddPersonCommand>()
+        var command = _validCommandComposer
             .With(c => c.PersonalNumber, invalidPersonalNumber)
             .Create();
 
@@ -118,7 +144,7 @@ public class AddPersonCommandValidatorTests
     public void When_AgeIsInvalid_Then_ValidationFails(int years, int month, int day)
     {
         // Arrange
-        var command = _fixture.Build<AddPersonCommand>()
+        var command = _validCommandComposer
             .With(c => c.BirthDate, new DateTime(years, month, day))
             .Create();
 
@@ -146,7 +172,7 @@ public class AddPersonCommandValidatorTests
     public void When_CityCodeIsInvalid_Then_ValidationFails(string invalidCityCode)
     {
         // Arrange
-        var command = _fixture.Build<AddPersonCommand>()
+        var command = _validCommandComposer
             .With(c => c.CityCode, invalidCityCode)
             .Create();
 
@@ -169,7 +195,7 @@ public class AddPersonCommandValidatorTests
     public void When_PhoneNumbersCountryIsInvalid_Then_ValidationFails(string countryCode)
     {
         // Arrange
-        var command = _fixture.Build<AddPersonCommand>()
+        var command = _validCommandComposer
             .With(c => c.PhoneNumbers, [new PhoneNumberDto(countryCode, "568", "117764", PhoneType.Home)])
             .Create();
 
@@ -192,7 +218,7 @@ public class AddPersonCommandValidatorTests
     public void When_PhoneNumbersAreaCodeIsInvalid_Then_ValidationFails(string areaCode)
     {
         // Arrange
-        var command = _fixture.Build<AddPersonCommand>()
+        var command = _validCommandComposer
             .With(c => c.PhoneNumbers, [new PhoneNumberDto("995", areaCode, "117764", PhoneType.Home)])
             .Create();
 
@@ -209,14 +235,15 @@ public class AddPersonCommandValidatorTests
     }
 
     [TestCase("")]
+    [TestCase(null)]
     [TestCase("  ")]
     [TestCase("a")]
-    [TestCase("123")]
+    [TestCase("123a")]
     [TestCase("123456789876554")]
     public void When_PhoneNumbersNumberIsInvalid_Then_ValidationFails(string number)
     {
         // Arrange
-        var command = _fixture.Build<AddPersonCommand>()
+        var command = _validCommandComposer
             .With(c => c.PhoneNumbers, [new PhoneNumberDto("995", "568", number, PhoneType.Home)])
             .Create();
 
@@ -233,23 +260,43 @@ public class AddPersonCommandValidatorTests
     }
 
     [Test]
-    public void When_ValidCommand_Then_ValidationSucceeds()
+    public void When_PhoneNumbersAreNull_Then_ValidationFails()
     {
         // Arrange
-        var command = _fixture.Build<AddPersonCommand>()
-            .With(c => c.FirstName, "John")
-            .With(c => c.LastName, "Doe")
-            .With(c => c.PersonalNumber, "11111111111")
-            .With(c => c.BirthDate, new DateTime(2000, 01, 01))
-            .With(c => c.CityCode, "TB")
-            .With(c => c.PhoneNumbers, [new PhoneNumberDto("995", "568", "117764", PhoneType.Home)])
+        var command = _validCommandComposer
+            .With(c => c.PhoneNumbers, (List<PhoneNumberDto>)null)
             .Create();
 
         // Act
         var result = _validator.Validate(command);
 
         // Assert
-        Assert.That(result.IsValid, Is.True);
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.IsValid, Is.False);
+            var errorMessage = FindErrorMessage(nameof(PhoneNumberDto.Number), result);
+            Assert.That(errorMessage, Is.Not.Null);
+        });
+    }
+    
+    [Test]
+    public void When_PhoneNumbersAreEmpty_Then_ValidationFails()
+    {
+        // Arrange
+        var command = _validCommandComposer
+            .With(c => c.PhoneNumbers, (List<PhoneNumberDto>)null)
+            .Create();
+
+        // Act
+        var result = _validator.Validate(command);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.IsValid, Is.False);
+            var errorMessage = FindErrorMessage(nameof(PhoneNumberDto.Number), result);
+            Assert.That(errorMessage, Is.Not.Null);
+        });
     }
 
     private static string FindErrorMessage(string propertyName, ValidationResult validationResult)

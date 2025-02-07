@@ -8,25 +8,30 @@ public class AddPersonCommandValidator : AbstractValidator<AddPersonCommand>
     public AddPersonCommandValidator()
     {
         RuleFor(person => person.FirstName)
-            .NotNull()
+            .NotEmpty()
             .SetValidator(new FirstNameValidator());
 
         RuleFor(person => person.LastName)
-            .NotNull()
+            .NotEmpty()
             .SetValidator(new LastNameValidator());
         
         RuleFor(person => person.PersonalNumber)
-            .NotNull()
+            .NotEmpty()
             .SetValidator(new PersonalNumberValidator());
 
         RuleFor(person => person.BirthDate)
+            .NotEmpty()
             .SetValidator(new AgeValidator());
         
         RuleFor(person => person.CityCode)
-            .NotNull()
+            .NotEmpty()
             .SetValidator(new CityCodeValidator());
+
+        RuleFor(person => person.PhoneNumbers)
+            .NotEmpty();
         
         RuleForEach(person => person.PhoneNumbers)
+            .NotEmpty()
             .SetValidator(new PhoneNumberDtoValidator());
     }
 }
