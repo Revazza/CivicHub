@@ -17,6 +17,7 @@ public static class DependencyInjection
     {
         services.AddLazyRepository<IPersonRepository, PersonRepository>();
         services.AddLazyRepository<ICityRepository, CityRepository>();
+        services.AddLazyRepository<IPersonConnectionRepository, PersonConnectionRepository>();
         services.AddScoped<IPersonRepository, PersonRepository>();
     }
 
@@ -25,7 +26,7 @@ public static class DependencyInjection
         where TImplementation : class, TRepository
     {
         services.AddScoped<TRepository, TImplementation>();
-        services.AddScoped<Lazy<TRepository>>(sp =>
+        services.AddScoped(sp =>
             new Lazy<TRepository>(sp.GetRequiredService<TRepository>));
     }
 }
