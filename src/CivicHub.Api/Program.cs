@@ -1,4 +1,5 @@
 using CivicHub.Api;
+using CivicHub.Api.ActionFilters;
 using CivicHub.Api.Middlewares;
 using CivicHub.Application;
 using CivicHub.Infrastructure;
@@ -6,7 +7,10 @@ using CivicHub.Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(filters =>
+{
+    filters.Filters.Add(new FieldValidationAttribute());
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
