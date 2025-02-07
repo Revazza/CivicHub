@@ -28,6 +28,8 @@ public class PersonConfigurations : IEntityTypeConfiguration<Person>
             .HasMaxLength(PersonConstraints.PersonalNumberLength)
             .IsRequired();
 
+        builder.HasIndex(x => x.PersonalNumber).IsUnique();
+
         builder.OwnsMany(x => x.PhoneNumbers, phone =>
         {
             phone.Property(p => p.CountryCode)
