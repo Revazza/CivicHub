@@ -1,6 +1,7 @@
 using CivicHub.Api.ActionFilters;
 using CivicHub.Api.Middlewares;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace CivicHub.Api;
 
@@ -14,6 +15,7 @@ public static class DependencyInjection
         {
             options.SuppressModelStateInvalidFilter = true;
         });
+        services.AddScoped<CorrelationMiddleware>();
         services.AddScoped<GlobalExceptionLoggingMiddleware>();
         return services;
     }
