@@ -4,6 +4,7 @@ using CivicHub.Application.Repositories;
 using CivicHub.Domain.Persons.Entities.PersonConnections;
 using CivicHub.Domain.Persons.Entities.PersonConnections.Exceptions;
 using CivicHub.Domain.Persons.Exceptions;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 
@@ -16,6 +17,7 @@ public class AddConnectionCommandHandlerTests
     private Mock<IUnitOfWork> _unitOfWorkMock;
     private Mock<IPersonRepository> _personRepositoryMock;
     private Mock<IPersonConnectionRepository> _personConnectionRepositoryMock;
+    private Mock<ILogger<AddConnectionCommandHandler>> _loggerMock;
     private AddConnectionCommandHandler _handler;
 
     [SetUp]
@@ -24,7 +26,8 @@ public class AddConnectionCommandHandlerTests
         _unitOfWorkMock = new Mock<IUnitOfWork>();
         _personRepositoryMock = new Mock<IPersonRepository>();
         _personConnectionRepositoryMock = new Mock<IPersonConnectionRepository>();
-        _handler = new AddConnectionCommandHandler(_unitOfWorkMock.Object);
+        _loggerMock = new Mock<ILogger<AddConnectionCommandHandler>>();
+        _handler = new AddConnectionCommandHandler(_unitOfWorkMock.Object, _loggerMock.Object);
 
         _fixture = new Fixture();
         _unitOfWorkMock.Setup(u => u.PersonRepository).Returns(_personRepositoryMock.Object);
