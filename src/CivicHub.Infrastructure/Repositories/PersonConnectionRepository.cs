@@ -8,6 +8,12 @@ namespace CivicHub.Infrastructure.Repositories;
 public class PersonConnectionRepository(CivicHubContext context)
     : GenericRepository<PersonConnection, Guid>(context), IPersonConnectionRepository
 {
+    public async Task ExecuteDeleteAsync(long personId, CancellationToken cancellationToken)
+        => await Context
+            .PersonConnections
+            .Where(b => b.PersonId == personId || b.ConnectedPersonId == personId)
+            .ExecuteDeleteAsync(cancellationToken);
+
     public async Task<bool> DoesConnectionExistsAsync(
         long personId,
         long connectedPersonId,
