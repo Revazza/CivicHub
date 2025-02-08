@@ -1,3 +1,4 @@
+using CivicHub.Application.Common.Responses;
 using CivicHub.Application.Features.Persons.Queries.GetFullInformation;
 using CivicHub.Domain.Persons;
 
@@ -18,5 +19,11 @@ public interface IPersonRepository : IGenericRepository<Person, int>
 
     Task<GetFullInformationResponse> GetPersonFullInformationAsync(
         long personId,
+        CancellationToken cancellationToken = default);
+
+    Task<List<ShortPersonResponse>> SearchPersonsAsync(
+        string firstName,
+        string lastName,
+        string personalNumber,
         CancellationToken cancellationToken = default);
 }

@@ -1,3 +1,4 @@
+using CivicHub.Application.Common.Responses;
 using CivicHub.Application.Features.Persons.Queries.GetFullInformation;
 using CivicHub.Application.Repositories;
 using CivicHub.Domain.Persons;
@@ -47,13 +48,29 @@ public class PersonRepository(CivicHubContext context) :
         CancellationToken cancellationToken = default)
         => await Context.Persons.AsNoTracking()
             .AsSplitQuery()
-            .Include(x => x.Connections)
-            .ThenInclude(x => x.ConnectedPerson)
-            .Include(x => x.ConnectedTo)
-            .ThenInclude(x => x.Person)
-            .Include(x => x.PhoneNumbers)
-            .Include(x => x.City)
-            .Where(x => x.Id == personId)
+            .Include(person => person.Connections)
+            .ThenInclude(personConnection => personConnection.ConnectedPerson)
+            .Include(person => person.ConnectedTo)
+            .ThenInclude(personConnection => personConnection.Person)
+            .Include(person => person.PhoneNumbers)
+            .Include(person => person.City)
+            .Where(person => person.Id == personId)
             .ProjectToType<GetFullInformationResponse>()
             .FirstOrDefaultAsync(cancellationToken);
+
+    public async Task<List<ShortPersonResponse>> SearchPersonsAsync(
+        string firstName,
+        string lastName,
+        string personalNumber,
+        CancellationToken cancellationToken = default)
+        => await Context
+            .Persons
+            .AsNoTracking()
+            .Where(person =>
+                person.FirstName.Contains(firstName) ||
+                person.LastName.Contains(lastName) ||
+                person.PersonalNumber.Contains(personalNumber)
+            )
+            .ProjectToType<ShortPersonResponse>()
+            .ToListAsync(cancellationToken);
 }
