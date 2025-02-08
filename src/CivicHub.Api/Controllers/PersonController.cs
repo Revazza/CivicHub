@@ -4,7 +4,7 @@ using CivicHub.Application.Features.Persons.Commands.UpdatePerson;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CivicHub.Controllers;
+namespace CivicHub.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

@@ -20,7 +20,7 @@ namespace CivicHub.Api.ActionFilters;
 /// }
 /// With this we avoid having two kind of response and stick with the <see cref="Result"/> response
 /// </summary>
-public class FieldValidationAttribute : IActionFilter
+public class FieldValidationFilter : IActionFilter
 {
     private const string Separator = "; ";
 
