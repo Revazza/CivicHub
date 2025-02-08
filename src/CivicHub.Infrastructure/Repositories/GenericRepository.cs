@@ -15,19 +15,13 @@ public abstract class GenericRepository<TEntity, TId> : IGenericRepository<TEnti
         Context = context;
         _dbSet = context.Set<TEntity>();
     }
-    
+
     public async Task InsertAsync(TEntity entity, CancellationToken cancellationToken = default)
         => await _dbSet.AddAsync(entity, cancellationToken);
 
     public async Task<TEntity> GetByIdAsync(TId id) => await _dbSet.FindAsync(id);
 
-    public void Update(TEntity entity)
-    {
-        _dbSet.Update(entity);
-    }
+    public void Update(TEntity entity) => _dbSet.Update(entity);
 
-    public void Delete(TEntity entity)
-    {
-        _dbSet.Remove(entity);
-    }
+    public void Delete(TEntity entity) => _dbSet.Remove(entity);
 }
