@@ -24,6 +24,4 @@ public abstract class GenericRepository<TEntity, TId> : IGenericRepository<TEnti
     public void Update(TEntity entity) => _dbSet.Update(entity);
 
     public void Delete(TEntity entity) => _dbSet.Remove(entity);
-
-    public IQueryable<TEntity> AsQueryable() => _dbSet.AsQueryable();
 }
