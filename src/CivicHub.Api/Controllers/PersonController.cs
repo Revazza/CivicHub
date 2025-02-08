@@ -10,6 +10,7 @@ namespace CivicHub.Api.Controllers;
 [Route("api/[controller]")]
 public class PersonController(IMediator mediator) : ControllerBase
 {
+    [ProducesResponseType(typeof(Result), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(Result), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(Result), StatusCodes.Status500InternalServerError)]
     [HttpPost]
@@ -19,6 +20,7 @@ public class PersonController(IMediator mediator) : ControllerBase
         return Ok(result);
     }
 
+    [ProducesResponseType(typeof(Result), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(Result), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(Result), StatusCodes.Status500InternalServerError)]
     [HttpPut]
