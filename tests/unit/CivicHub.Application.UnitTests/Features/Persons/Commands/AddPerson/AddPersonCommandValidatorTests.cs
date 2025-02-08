@@ -1,11 +1,9 @@
 using AutoFixture;
 using AutoFixture.Dsl;
-using CivicHub.Application.Common.Extensions;
 using CivicHub.Application.Features.Persons.Commands.AddPerson;
 using CivicHub.Application.Features.Persons.Commands.Common.Dtos;
-using CivicHub.Domain.Persons;
 using CivicHub.Domain.Persons.ValueObjects.PhoneNumbers.Enums;
-using FluentValidation.Results;
+using FluentValidation.TestHelper;
 using NUnit.Framework;
 
 namespace CivicHub.Application.UnitTests.Features.Persons.Commands.AddPerson;
@@ -41,7 +39,7 @@ public class AddPersonCommandValidatorTests
         var command = _validCommandComposer.Create();
 
         // Act
-        var result = _validator.Validate(command);
+        var result = _validator.TestValidate(command);
 
         // Assert
         Assert.That(result.IsValid, Is.True);
@@ -66,15 +64,10 @@ public class AddPersonCommandValidatorTests
             .Create();
 
         // Act
-        var result = _validator.Validate(command);
+        var result = _validator.TestValidate(command);
 
         // Assert
-        Assert.Multiple(() =>
-        {
-            Assert.That(result.IsValid, Is.False);
-            var errorMessage = FindErrorMessage(nameof(Person.FirstName), result);
-            Assert.That(errorMessage, Is.Not.Null);
-        });
+        result.ShouldHaveValidationErrorFor(x => x.FirstName);
     }
 
     [TestCase("")]
@@ -96,15 +89,10 @@ public class AddPersonCommandValidatorTests
             .Create();
 
         // Act
-        var result = _validator.Validate(command);
+        var result = _validator.TestValidate(command);
 
         // Assert
-        Assert.Multiple(() =>
-        {
-            Assert.That(result.IsValid, Is.False);
-            var errorMessage = FindErrorMessage(nameof(Person.LastName), result);
-            Assert.That(errorMessage, Is.Not.Null);
-        });
+        result.ShouldHaveValidationErrorFor(x => x.LastName);
     }
 
     [TestCase("")]
@@ -127,15 +115,10 @@ public class AddPersonCommandValidatorTests
             .Create();
 
         // Act
-        var result = _validator.Validate(command);
+        var result = _validator.TestValidate(command);
 
         // Assert
-        Assert.Multiple(() =>
-        {
-            Assert.That(result.IsValid, Is.False);
-            var errorMessage = FindErrorMessage(nameof(Person.PersonalNumber), result);
-            Assert.That(errorMessage, Is.Not.Null);
-        });
+        result.ShouldHaveValidationErrorFor(x => x.PersonalNumber);
     }
 
     [TestCase(2050, 01, 01)] // Future date
@@ -149,15 +132,10 @@ public class AddPersonCommandValidatorTests
             .Create();
 
         // Act
-        var result = _validator.Validate(command);
+        var result = _validator.TestValidate(command);
 
         // Assert
-        Assert.Multiple(() =>
-        {
-            Assert.That(result.IsValid, Is.False);
-            var errorMessage = FindErrorMessage(nameof(Person.BirthDate), result);
-            Assert.That(errorMessage, Is.Not.Null);
-        });
+        result.ShouldHaveValidationErrorFor(x => x.BirthDate);
     }
 
     [TestCase("")]
@@ -177,15 +155,10 @@ public class AddPersonCommandValidatorTests
             .Create();
 
         // Act
-        var result = _validator.Validate(command);
+        var result = _validator.TestValidate(command);
 
         // Assert
-        Assert.Multiple(() =>
-        {
-            Assert.That(result.IsValid, Is.False);
-            var errorMessage = FindErrorMessage(nameof(Person.CityCode), result);
-            Assert.That(errorMessage, Is.Not.Null);
-        });
+        result.ShouldHaveValidationErrorFor(x => x.CityCode);
     }
 
     [TestCase("")]
@@ -200,15 +173,10 @@ public class AddPersonCommandValidatorTests
             .Create();
 
         // Act
-        var result = _validator.Validate(command);
+        var result = _validator.TestValidate(command);
 
         // Assert
-        Assert.Multiple(() =>
-        {
-            Assert.That(result.IsValid, Is.False);
-            var errorMessage = FindErrorMessage(nameof(PhoneNumberDto.CountryCode), result);
-            Assert.That(errorMessage, Is.Not.Null);
-        });
+        result.ShouldHaveValidationErrorFor($"PhoneNumbers[0].{nameof(PhoneNumberDto.CountryCode)}");
     }
 
     [TestCase("")]
@@ -223,15 +191,10 @@ public class AddPersonCommandValidatorTests
             .Create();
 
         // Act
-        var result = _validator.Validate(command);
+        var result = _validator.TestValidate(command);
 
         // Assert
-        Assert.Multiple(() =>
-        {
-            Assert.That(result.IsValid, Is.False);
-            var errorMessage = FindErrorMessage(nameof(PhoneNumberDto.AreaCode), result);
-            Assert.That(errorMessage, Is.Not.Null);
-        });
+        result.ShouldHaveValidationErrorFor($"PhoneNumbers[0].{nameof(PhoneNumberDto.AreaCode)}");
     }
 
     [TestCase("")]
@@ -248,15 +211,10 @@ public class AddPersonCommandValidatorTests
             .Create();
 
         // Act
-        var result = _validator.Validate(command);
+        var result = _validator.TestValidate(command);
 
         // Assert
-        Assert.Multiple(() =>
-        {
-            Assert.That(result.IsValid, Is.False);
-            var errorMessage = FindErrorMessage(nameof(PhoneNumberDto.Number), result);
-            Assert.That(errorMessage, Is.Not.Null);
-        });
+        result.ShouldHaveValidationErrorFor($"PhoneNumbers[0].{nameof(PhoneNumberDto.Number)}");
     }
 
     [Test]
@@ -268,17 +226,12 @@ public class AddPersonCommandValidatorTests
             .Create();
 
         // Act
-        var result = _validator.Validate(command);
+        var result = _validator.TestValidate(command);
 
         // Assert
-        Assert.Multiple(() =>
-        {
-            Assert.That(result.IsValid, Is.False);
-            var errorMessage = FindErrorMessage(nameof(PhoneNumberDto.Number), result);
-            Assert.That(errorMessage, Is.Not.Null);
-        });
+        result.ShouldHaveValidationErrorFor(x => x.PhoneNumbers);
     }
-    
+
     [Test]
     public void When_PhoneNumbersAreEmpty_Then_ValidationFails()
     {
@@ -288,20 +241,9 @@ public class AddPersonCommandValidatorTests
             .Create();
 
         // Act
-        var result = _validator.Validate(command);
+        var result = _validator.TestValidate(command);
 
         // Assert
-        Assert.Multiple(() =>
-        {
-            Assert.That(result.IsValid, Is.False);
-            var errorMessage = FindErrorMessage(nameof(PhoneNumberDto.Number), result);
-            Assert.That(errorMessage, Is.Not.Null);
-        });
+        result.ShouldHaveValidationErrorFor(x => x.PhoneNumbers);
     }
-
-    private static string FindErrorMessage(string propertyName, ValidationResult validationResult)
-        => validationResult
-            .Errors
-            .FirstOrDefault(validationFailure =>
-                validationFailure.PropertyName.Contains(propertyName))?.ErrorMessage;
 }

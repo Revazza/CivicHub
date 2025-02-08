@@ -12,14 +12,14 @@ public static class ValidatorExtensions
     private const string OnlyDigitsPattern = @"^\d+$";
 
     public static IRuleBuilderOptions<T, string> MustBeEnglish<T>(
-        this IRuleBuilderOptions<T, string> ruleBuilder)
+        this IRuleBuilderOptions<T, string> ruleBuilder,string propertyName)
         => ruleBuilder.Must(input => Regex.IsMatch(input, EnglishPattern))
-            .WithMessage("'{PropertyName}' must be English");
+            .WithMessage($"{propertyName} must be English");
 
     public static IRuleBuilderOptions<T, string> MustBeEnglishOrGeorgian<T>(
-        this IRuleBuilderOptions<T, string> ruleBuilder)
+        this IRuleBuilderOptions<T, string> ruleBuilder, string propertyName)
         => ruleBuilder.Must(input => Regex.IsMatch(input, EnglishOrGeorgianPattern))
-            .WithMessage("'{PropertyName}' must be English or Georgian");
+            .WithMessage($"{propertyName} must be English or Georgian");
 
     public static IRuleBuilderOptions<T, string> MustBeOneWord<T>(
         this IRuleBuilderOptions<T, string> ruleBuilder, string propertyName)
@@ -30,11 +30,6 @@ public static class ValidatorExtensions
         this IRuleBuilderOptions<T, string> ruleBuilder, string propertyName)
         => ruleBuilder.Must(HasOnlyDigits)
             .WithMessage($"{propertyName} should contain only digits");
-
-    public static IRuleBuilderOptions<T, string> MustContainOnlyDigits<T>(
-        this IRuleBuilderOptions<T, string> ruleBuilder)
-        => ruleBuilder.Must(HasOnlyDigits)
-            .WithMessage("{PropertyName} should contain only digits");
 
     private static bool HasExactlyOneWord(string input) => input.IsNotNullOrEmpty() && input.Split(Separator).Length == 1;
 
