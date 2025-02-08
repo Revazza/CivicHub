@@ -45,5 +45,5 @@ public class FieldValidationFilter : IActionFilter
     private static IEnumerable<string> GetAllErrors(ActionExecutingContext context)
         => context.ModelState
             .Where(ms => ms.Value.Errors.Count > 0)
-            .SelectMany(ms => ms.Value.Errors.Select(e => $"{ms.Key}: {e.ErrorMessage}"));
+            .SelectMany(ms => ms.Value.Errors.Select(_ => $"{ms.Key}: Invalid input format"));
 }
