@@ -12,10 +12,26 @@ public class PersonRepository(CivicHubContext context) :
     public async Task<bool> DoesExistAsync(string personalNumber, CancellationToken cancellationToken = default)
         => await Context.Persons.AnyAsync(x => x.PersonalNumber == personalNumber, cancellationToken);
 
-    public async Task<Person> GetForUpdateAsync(string personalNumber,
+    public async Task<Person> GetForUpdateAsync(
+        string personalNumber,
         CancellationToken cancellationToken = default)
         => await Context
             .Persons
             .Include(x => x.PhoneNumbers)
             .FirstOrDefaultAsync(x => x.PersonalNumber == personalNumber, cancellationToken);
+
+    public async Task<bool> DoBothPersonsExistAsync(
+        long personId,
+        long otherPersonId,
+        CancellationToken cancellationToken = default)
+    {
+        const int expectedPersonCount = 2;
+        
+        var persons = await Context
+            .Persons
+            .Where(x => x.Id == personId || x.Id == otherPersonId)
+            .ToListAsync(cancellationToken);
+        
+        return persons.Count == expectedPersonCount;
+    }
 }

@@ -8,4 +8,9 @@ public class PersonDoesntExistException : DomainException
         $"Person doesn't exist by personal number {personalNumber}")
     {
     }
+
+    public PersonDoesntExistException(long personId, long otherPersonId) : base(
+        $"One of the person or both doesn't exist PersonId: {personId}, OtherPersonId: {otherPersonId}")
+    {
+    }
 }

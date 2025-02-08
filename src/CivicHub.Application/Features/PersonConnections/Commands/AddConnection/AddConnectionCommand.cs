@@ -3,4 +3,4 @@ using MediatR;
 
 namespace CivicHub.Application.Features.PersonConnections.Commands.AddConnection;
 
-public record AddConnectionCommand(long PersonId, long TargetPersonId) : IRequest<Result>;
+public record AddConnectionCommand(long PersonId, long OtherPersonId) : IRequest<Result>;
