@@ -7,4 +7,5 @@ public interface IGenericRepository<TEntity, in TId>
     Task<TEntity> GetByIdAsync(TId id);
     void Update(TEntity entity);
     void Delete(TEntity entity);
+    IQueryable<TEntity> AsQueryable();
 }
