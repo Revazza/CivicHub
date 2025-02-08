@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using CivicHub.Application.Common.Responses;
 using CivicHub.Application.Features.Persons.Queries.GetFullInformation;
 using CivicHub.Application.Repositories;
@@ -59,18 +60,21 @@ public class PersonRepository(CivicHubContext context) :
             .FirstOrDefaultAsync(cancellationToken);
 
     public async Task<List<ShortPersonResponse>> SearchPersonsAsync(
-        string firstName,
-        string lastName,
-        string personalNumber,
+        int pageNumber,
+        int pageSize,
+        Expression<Func<Person, bool>> expression,
         CancellationToken cancellationToken = default)
         => await Context
             .Persons
             .AsNoTracking()
-            .Where(person =>
-                person.FirstName.Contains(firstName) ||
-                person.LastName.Contains(lastName) ||
-                person.PersonalNumber.Contains(personalNumber)
-            )
+            .Where(expression)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
             .ProjectToType<ShortPersonResponse>()
             .ToListAsync(cancellationToken);
+
+    public async Task<int> GetTotalCountAsync(
+        Expression<Func<Person, bool>> expression,
+        CancellationToken cancellationToken = default)
+        => await Context.Persons.AsNoTracking().Where(expression).CountAsync(cancellationToken);
 }

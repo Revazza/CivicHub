@@ -7,4 +7,6 @@ namespace CivicHub.Application.Features.Persons.Queries.SimpleSearchPerson;
 public record SimpleSearchPersonQuery(
     string FirstName,
     string LastName,
-    string PersonalNumber) : IRequest<Result<List<ShortPersonResponse>>>;
+    string PersonalNumber,
+    int PageSize,
+    int PageNumber) : IRequest<Result<PaginatedResult<ShortPersonResponse>>>;

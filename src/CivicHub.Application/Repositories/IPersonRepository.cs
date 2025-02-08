@@ -1,5 +1,7 @@
+using System.Linq.Expressions;
 using CivicHub.Application.Common.Responses;
 using CivicHub.Application.Features.Persons.Queries.GetFullInformation;
+using CivicHub.Application.Features.Persons.Queries.SimpleSearchPerson;
 using CivicHub.Domain.Persons;
 
 namespace CivicHub.Application.Repositories;
@@ -22,8 +24,12 @@ public interface IPersonRepository : IGenericRepository<Person, int>
         CancellationToken cancellationToken = default);
 
     Task<List<ShortPersonResponse>> SearchPersonsAsync(
-        string firstName,
-        string lastName,
-        string personalNumber,
+        int pageNumber,
+        int pageSize,
+        Expression<Func<Person, bool>> expression,
+        CancellationToken cancellationToken = default);
+
+    Task<int> GetTotalCountAsync(
+        Expression<Func<Person, bool>> expression,
         CancellationToken cancellationToken = default);
 }
