@@ -5,36 +5,29 @@ using Microsoft.Extensions.Logging;
 
 namespace CivicHub.Application.Behaviours;
 
-public class ValidationPipelineBehaviour<TRequest, TResponse>
+public class ValidationPipelineBehaviour<TRequest, TResponse>(
+    ILogger<ValidationPipelineBehaviour<TRequest, TResponse>> logger,
+    IValidator<TRequest> validator = null)
     : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
 {
-    private readonly ILogger<ValidationPipelineBehaviour<TRequest, TResponse>> _logger;
-    private readonly IValidator<TRequest> _validator;
-
-    public ValidationPipelineBehaviour(
-        ILogger<ValidationPipelineBehaviour<TRequest, TResponse>> logger,
-        IValidator<TRequest> validator = null)
-    {
-        _logger = logger;
-        _validator = validator;
-    }
-
-    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
+    public async Task<TResponse> Handle(
+        TRequest request,
+        RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
     {
-        if (_validator is null)
+        if (validator is null)
         {
             return await next();
         }
 
-        _logger.LogInformation("Starting validating request: {RequestName}", typeof(TRequest).Name);
+        logger.LogInformation("Starting validating request: {RequestName}", typeof(TRequest).Name);
 
-        var validationResult = await _validator.ValidateAsync(request, cancellationToken);
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
         if (validationResult.IsValid)
         {
-            _logger.LogInformation("Validation passed for request: {RequestName}", typeof(TRequest).Name);
+            logger.LogInformation("Validation passed for request: {RequestName}", typeof(TRequest).Name);
             return await next();
         }
 
@@ -43,7 +36,7 @@ public class ValidationPipelineBehaviour<TRequest, TResponse>
             .SelectMany(group =>
                 group.Select(validationFailure => new Error(validationFailure.ErrorMessage, ErrorType.Validation)))
             .ToList();
-        
+
         LogValidationFailures(errors);
 
         return (dynamic)errors;
@@ -53,8 +46,8 @@ public class ValidationPipelineBehaviour<TRequest, TResponse>
     {
         const string separator = " | ";
         var errorMessages = string.Join(separator, errors.Select(x => x.Message));
-        
-        _logger.LogInformation("Validation failed for request: {RequestName}, Reason(s): {Reasons}",
+
+        logger.LogInformation("Validation failed for request: {RequestName}, Reason(s): {Reasons}",
             typeof(TRequest).Name, errorMessages);
     }
 }

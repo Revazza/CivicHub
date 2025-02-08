@@ -4,8 +4,12 @@ using CivicHub.Api.Middlewares;
 using CivicHub.Application;
 using CivicHub.Infrastructure;
 using CivicHub.Persistance;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((context, config) =>
+    config.ReadFrom.Configuration(context.Configuration));
 
 builder.Services.AddControllers(filters =>
 {
@@ -29,6 +33,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<CorrelationMiddleware>();
 app.UseMiddleware<GlobalExceptionLoggingMiddleware>();
 app.UseHttpsRedirection();
 app.MapControllers();

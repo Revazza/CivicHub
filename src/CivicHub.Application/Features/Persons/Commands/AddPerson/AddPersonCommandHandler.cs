@@ -14,9 +14,6 @@ public class AddPersonCommandHandler(IUnitOfWork unitOfWork, ILogger<AddPersonCo
 {
     public async Task<Result> Handle(AddPersonCommand request, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Process started to handle {RequestType} for PersonalNumber: {PersonalNumber}",
-            nameof(AddPersonCommand), request.PersonalNumber);
-
         await ValidateAsync(request, cancellationToken);
 
         var person = request.Adapt<Person>();
@@ -28,9 +25,6 @@ public class AddPersonCommandHandler(IUnitOfWork unitOfWork, ILogger<AddPersonCo
 
         logger.LogInformation("Person with PersonalNumber: {PersonalNumber} successfully added",
             request.PersonalNumber);
-
-        logger.LogInformation("Process ended to handle {RequestType} for PersonalNumber: {PersonalNumber}",
-            nameof(AddPersonCommand), request.PersonalNumber);
 
         return Result.Success();
     }
