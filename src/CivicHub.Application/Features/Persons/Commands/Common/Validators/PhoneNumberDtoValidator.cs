@@ -7,24 +7,28 @@ namespace CivicHub.Application.Features.Persons.Commands.Common.Validators;
 
 public class PhoneNumberDtoValidator : AbstractValidator<PhoneNumberDto>
 {
+    private const string CountryCode = nameof(PhoneNumberDto.CountryCode);
+    private const string AreaCode = nameof(PhoneNumberDto.AreaCode);
+    private const string Number = nameof(PhoneNumberDto.Number);
+    
     public PhoneNumberDtoValidator()
     {
         RuleFor(phone => phone.CountryCode)
             .NotEmpty()
             .MinimumLength(PhoneNumberConstraints.MinCountryCodeLength)
             .MaximumLength(PhoneNumberConstraints.MaxCountryCodeLength)
-            .MustContainOnlyDigits();
+            .MustContainOnlyDigits(CountryCode);
 
         RuleFor(phone => phone.AreaCode)
             .NotEmpty()
             .MinimumLength(PhoneNumberConstraints.MinAreaCodeLength)
             .MaximumLength(PhoneNumberConstraints.MaxAreaCodeLength)
-            .MustContainOnlyDigits();
+            .MustContainOnlyDigits(AreaCode);
 
         RuleFor(phone => phone.Number)
             .NotEmpty()
             .MinimumLength(PhoneNumberConstraints.MinNumberLength)
             .MaximumLength(PhoneNumberConstraints.MaxNumberLength)
-            .MustContainOnlyDigits();
+            .MustContainOnlyDigits(Number);
     }
 }

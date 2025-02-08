@@ -14,11 +14,14 @@ public class PersonConnectionsConfigurations : IEntityTypeConfiguration<PersonCo
         builder.HasOne(x => x.Person)
             .WithMany(x => x.Connections)
             .HasForeignKey(x => x.PersonId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.Restrict);
         
         builder.HasOne(x => x.ConnectedPerson)
             .WithMany(x => x.ConnectedTo)
             .HasForeignKey(x => x.ConnectedPersonId)
             .OnDelete(DeleteBehavior.Restrict);
+        
+        builder.HasIndex(x => new { x.PersonId, x.ConnectedPersonId })
+            .IsUnique();
     }
 }

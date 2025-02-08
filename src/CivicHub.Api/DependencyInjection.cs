@@ -8,7 +8,8 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApi(this IServiceCollection services)
     {
-        services.AddScoped<FieldValidationAttribute>();
+        services.AddScoped<FieldValidationFilter>();
+        services.AddScoped<ValidationResultFilter>();
         services.Configure<ApiBehaviorOptions>(options =>
         {
             options.SuppressModelStateInvalidFilter = true;

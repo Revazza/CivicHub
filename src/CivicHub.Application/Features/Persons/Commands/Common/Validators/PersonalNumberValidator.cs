@@ -1,4 +1,3 @@
-using System.Text.RegularExpressions;
 using CivicHub.Application.Features.Persons.Commands.Common.Extensions;
 using CivicHub.Domain.Persons;
 using FluentValidation;
@@ -13,7 +12,6 @@ public class PersonalNumberValidator : AbstractValidator<string>
     {
         RuleFor(personalNumber => personalNumber)
             .NotEmpty()
-            .WithName(PropertyName)
             .Length(PersonConstraints.PersonalNumberLength)
             .MustContainOnlyDigits(PropertyName);
     }

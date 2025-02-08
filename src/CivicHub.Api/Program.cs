@@ -9,7 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers(filters =>
 {
-    filters.Filters.Add(new FieldValidationAttribute());
+    filters.Filters.Add(new FieldValidationFilter());
+    filters.Filters.Add(new ValidationResultFilter());
 });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

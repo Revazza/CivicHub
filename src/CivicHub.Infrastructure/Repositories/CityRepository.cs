@@ -10,5 +10,5 @@ public class CityRepository(CivicHubContext hubContext) :
     ICityRepository
 {
     public async Task<bool> DoesExistAsync(string cityCode, CancellationToken cancellationToken = default)
-        => await _context.Cities.AnyAsync(x => x.Code == cityCode, cancellationToken);
+        => await Context.Cities.AnyAsync(x => x.Code == cityCode, cancellationToken);
 }

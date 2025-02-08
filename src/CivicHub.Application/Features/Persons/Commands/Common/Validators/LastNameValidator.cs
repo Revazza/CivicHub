@@ -12,10 +12,9 @@ public class LastNameValidator : AbstractValidator<string>
     {
         RuleFor(firstName => firstName)
             .NotEmpty()
-            .WithName(PropertyName)
             .MinimumLength(PersonConstraints.LastNameMinLength)
             .MustBeOneWord(PropertyName)
             .MaximumLength(PersonConstraints.LastNameMaxLength)
-            .MustBeEnglishOrGeorgian();
+            .MustBeEnglishOrGeorgian(PropertyName);
     }
 }

@@ -1,0 +1,19 @@
+using CivicHub.Application.Repositories;
+using CivicHub.Domain.Persons.Entities.PersonConnections;
+using CivicHub.Persistance.Contexts.CivicHubContexts;
+using Microsoft.EntityFrameworkCore;
+
+namespace CivicHub.Infrastructure.Repositories;
+
+public class PersonConnectionRepository(CivicHubContext context)
+    : GenericRepository<PersonConnection, Guid>(context), IPersonConnectionRepository
+{
+    public async Task<bool> DoesConnectionExistsAsync(
+        long personId,
+        long connectedPersonId,
+        CancellationToken cancellationToken = default)
+        => await Context.PersonConnections.AnyAsync(x =>
+                (x.PersonId == personId && x.ConnectedPersonId == connectedPersonId) ||
+                (x.PersonId == connectedPersonId && x.ConnectedPersonId == personId),
+            cancellationToken);
+}

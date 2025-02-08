@@ -13,9 +13,8 @@ public class CityCodeValidator : AbstractValidator<string>
     {
         RuleFor(cityCode => cityCode)
             .NotEmpty()
-            .WithName(PropertyName)
             .MinimumLength(CityConstraints.MinCityCodeLength)
             .MaximumLength(CityConstraints.MaxCityCodeLength)
-            .MustBeEnglish();
+            .MustBeEnglish(PropertyName);
     }
 }

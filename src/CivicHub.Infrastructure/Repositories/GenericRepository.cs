@@ -8,11 +8,11 @@ public abstract class GenericRepository<TEntity, TId> : IGenericRepository<TEnti
     where TEntity : class
 {
     private readonly DbSet<TEntity> _dbSet;
-    protected readonly CivicHubContext _context;
+    protected readonly CivicHubContext Context;
 
     protected GenericRepository(CivicHubContext context)
     {
-        _context = context;
+        Context = context;
         _dbSet = context.Set<TEntity>();
     }
     

@@ -20,7 +20,7 @@ namespace CivicHub.Api.ActionFilters;
 /// }
 /// With this we avoid having two kind of response and stick with the <see cref="Result"/> response
 /// </summary>
-public class FieldValidationAttribute : IActionFilter
+public class FieldValidationFilter : IActionFilter
 {
     private const string Separator = "; ";
 
@@ -45,5 +45,5 @@ public class FieldValidationAttribute : IActionFilter
     private static IEnumerable<string> GetAllErrors(ActionExecutingContext context)
         => context.ModelState
             .Where(ms => ms.Value.Errors.Count > 0)
-            .SelectMany(ms => ms.Value.Errors.Select(e => $"{ms.Key}: {e.ErrorMessage}"));
+            .SelectMany(ms => ms.Value.Errors.Select(_ => $"{ms.Key}: Invalid input format"));
 }
