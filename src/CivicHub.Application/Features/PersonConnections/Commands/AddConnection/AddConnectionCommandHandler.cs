@@ -4,10 +4,12 @@ using CivicHub.Domain.Persons.Entities.PersonConnections;
 using CivicHub.Domain.Persons.Entities.PersonConnections.Exceptions;
 using CivicHub.Domain.Persons.Exceptions;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace CivicHub.Application.Features.PersonConnections.Commands.AddConnection;
 
-public class AddConnectionCommandHandler(IUnitOfWork unitOfWork) : IRequestHandler<AddConnectionCommand, Result>
+public class AddConnectionCommandHandler(IUnitOfWork unitOfWork, ILogger<AddConnectionCommandHandler> logger)
+    : IRequestHandler<AddConnectionCommand, Result>
 {
     public async Task<Result> Handle(AddConnectionCommand request, CancellationToken cancellationToken)
     {
@@ -23,6 +25,7 @@ public class AddConnectionCommandHandler(IUnitOfWork unitOfWork) : IRequestHandl
         await unitOfWork.PersonConnectionRepository.InsertAsync(connection, cancellationToken);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
+        logger.LogInformation("Connection {ConnectionId} has been created", connection.Id);
         return Result.Success();
     }
 

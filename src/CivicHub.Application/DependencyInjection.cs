@@ -2,7 +2,6 @@ using System.Reflection;
 using CivicHub.Application.Behaviours;
 using FluentValidation;
 using Mapster;
-using MapsterMapper;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,6 +11,10 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
+        services.AddScoped(
+            typeof(IPipelineBehavior<,>),
+            typeof(LoggingBehavior<,>));
+        
         services.AddScoped(
             typeof(IPipelineBehavior<,>),
             typeof(ValidationPipelineBehaviour<,>));
