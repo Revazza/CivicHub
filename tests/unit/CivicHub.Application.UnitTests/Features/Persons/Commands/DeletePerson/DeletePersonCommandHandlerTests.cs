@@ -41,7 +41,7 @@ public class DeletePersonCommandHandlerTests
         // Arrange
         var command = _fixture.Create<DeletePersonCommand>();
         _personRepositoryMock
-            .Setup(pr => pr.GetByPersonalNumberAsync(command.PersonalNumber, It.IsAny<CancellationToken>()))
+            .Setup(pr => pr.GetByIdAsync(command.PersonId))
             .ReturnsAsync((Person)null);
 
         // Act & Assert
@@ -57,7 +57,7 @@ public class DeletePersonCommandHandlerTests
         var person = _fixture.Create<Person>();
 
         _personRepositoryMock
-            .Setup(pr => pr.GetByPersonalNumberAsync(command.PersonalNumber, It.IsAny<CancellationToken>()))
+            .Setup(pr => pr.GetByIdAsync(command.PersonId))
             .ReturnsAsync(person);
 
         // Act
@@ -80,7 +80,7 @@ public class DeletePersonCommandHandlerTests
         var person = _fixture.Create<Person>();
 
         _personRepositoryMock
-            .Setup(pr => pr.GetByPersonalNumberAsync(command.PersonalNumber, It.IsAny<CancellationToken>()))
+            .Setup(pr => pr.GetByIdAsync(command.PersonId))
             .ReturnsAsync(person);
 
         _unitOfWorkMock
