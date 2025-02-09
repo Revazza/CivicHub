@@ -12,18 +12,18 @@ public class DeletePersonCommandHandler(IUnitOfWork unitOfWork, ILogger<DeletePe
 {
     public async Task<Result> Handle(DeletePersonCommand request, CancellationToken cancellationToken)
     {
-        var person = await GetPersonToDeleteAsync(request.PersonalNumber, cancellationToken);
+        var person = await GetPersonToDeleteAsync(request.PersonId);
         await DeletePersonAsync(person, cancellationToken);
         return Result.Success();
     }
 
-    private async Task<Person> GetPersonToDeleteAsync(string personalNumber, CancellationToken cancellationToken)
+    private async Task<Person> GetPersonToDeleteAsync(long personId)
     {
-        var person = await unitOfWork.PersonRepository.GetByPersonalNumberAsync(personalNumber, cancellationToken);
+        var person = await unitOfWork.PersonRepository.GetByIdAsync(personId);
 
         if (person is null)
         {
-            throw new PersonDoesntExistException(personalNumber);
+            throw new PersonDoesntExistException(personId);
         }
 
         return person;

@@ -6,10 +6,12 @@ using CivicHub.Domain.Persons;
 
 namespace CivicHub.Application.Repositories;
 
-public interface IPersonRepository : IGenericRepository<Person, int>
+public interface IPersonRepository : IGenericRepository<Person, long>
 {
     Task<bool> DoesExistAsync(string personalNumber, CancellationToken cancellationToken = default);
-
+    
+    Task<bool> DoesExistAsync(long personId, CancellationToken cancellationToken = default);
+    
     Task<Person> GetForUpdateAsync(string personalNumber, CancellationToken cancellationToken = default);
 
     Task<Person> GetByPersonalNumberAsync(string personalNumber, CancellationToken cancellationToken = default);
