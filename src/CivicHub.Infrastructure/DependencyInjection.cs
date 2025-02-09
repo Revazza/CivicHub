@@ -1,5 +1,7 @@
+using CivicHub.Application.Common.Services;
 using CivicHub.Application.Repositories;
 using CivicHub.Infrastructure.Repositories;
+using CivicHub.Infrastructure.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CivicHub.Infrastructure;
@@ -8,8 +10,8 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
+        services.AddScoped<IPersonPictureService, PersonPictureService>();
         services.AddRepositories();
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
         return services;
     }
 
@@ -19,6 +21,7 @@ public static class DependencyInjection
         services.AddLazyRepository<ICityRepository, CityRepository>();
         services.AddLazyRepository<IPersonConnectionRepository, PersonConnectionRepository>();
         services.AddScoped<IPersonRepository, PersonRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 
     private static void AddLazyRepository<TRepository, TImplementation>(this IServiceCollection services)

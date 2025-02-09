@@ -7,7 +7,7 @@ public class DeletePersonCommandValidator: AbstractValidator<DeletePersonCommand
 {
     public DeletePersonCommandValidator()
     {
-        RuleFor(person => person.PersonalNumber)
-            .SetValidator(new PersonalNumberValidator());
+        RuleFor(person => person.PersonId)
+            .GreaterThan(0);
     }
 }
