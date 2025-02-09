@@ -15,13 +15,15 @@ public class PersonConnectionsConfigurations : IEntityTypeConfiguration<PersonCo
             .WithMany(x => x.Connections)
             .HasForeignKey(x => x.PersonId)
             .OnDelete(DeleteBehavior.Restrict);
-        
+
         builder.HasOne(x => x.ConnectedPerson)
             .WithMany(x => x.ConnectedTo)
             .HasForeignKey(x => x.ConnectedPersonId)
             .OnDelete(DeleteBehavior.Restrict);
-        
-        builder.HasIndex(x => new { x.PersonId, x.ConnectedPersonId })
+
+        builder.HasIndex(x => new { x.PersonId, x.ConnectedPersonId, x.ConnectionType })
             .IsUnique();
+
+        builder.Property(x => x.ConnectionType).HasMaxLength(PersonConnectionConstraints.MaxConnectionTypeLength);
     }
 }
