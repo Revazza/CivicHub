@@ -49,6 +49,8 @@ public class PersonConfigurations : IEntityTypeConfiguration<Person>
             .WithMany()
             .HasForeignKey(x => x.CityCode);
 
+        builder.Property(x => x.PictureFullPath).HasMaxLength(PersonConstraints.PicturePathMaxLength);
+
         builder.HasIndex(x => new { x.FirstName, x.LastName, x.PersonalNumber });
         builder.HasIndex(x => new { x.FirstName, x.LastName, x.PersonalNumber, x.Gender, x.BirthDate });
     }

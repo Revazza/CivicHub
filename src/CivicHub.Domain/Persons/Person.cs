@@ -34,6 +34,11 @@ public class Person
     /// Gets or sets the city identifier.
     /// </summary>
     public string CityCode { get; set; }
+
+    /// <summary>
+    /// Gets or sets full path to picture
+    /// </summary>
+    public string PictureFullPath { get; set; }
     
     /// <summary>
     /// Gets or sets the gender of the person.
@@ -64,6 +69,4 @@ public class Person
     /// Gets or sets a list of connections related to the person.
     /// </summary>
     public List<PersonConnection> ConnectedTo { get; set; } = [];
-
-    // TODO: Add person image
 }
