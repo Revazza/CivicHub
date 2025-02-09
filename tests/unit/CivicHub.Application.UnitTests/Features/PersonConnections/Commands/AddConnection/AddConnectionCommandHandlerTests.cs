@@ -54,10 +54,12 @@ public class AddConnectionCommandHandlerTests
         // Arrange
         var command = _fixture.Create<AddConnectionCommand>();
         _personRepositoryMock.Setup(pr =>
-                pr.DoBothPersonsExistAsync(command.PersonId, command.OtherPersonId, It.IsAny<CancellationToken>()))
+                pr.DoBothPersonsExistAsync(command.PersonId, command.OtherPersonId,
+                    It.IsAny<CancellationToken>()))
             .ReturnsAsync(true);
         _personConnectionRepositoryMock.Setup(pcr =>
-                pcr.DoesConnectionExistsAsync(command.PersonId, command.OtherPersonId, It.IsAny<CancellationToken>()))
+                pcr.DoesConnectionExistsAsync(command.PersonId, command.OtherPersonId, command.ConnectionType,
+                    It.IsAny<CancellationToken>()))
             .ReturnsAsync(true);
 
         // Act & Assert
@@ -74,7 +76,8 @@ public class AddConnectionCommandHandlerTests
                 pr.DoBothPersonsExistAsync(command.PersonId, command.OtherPersonId, It.IsAny<CancellationToken>()))
             .ReturnsAsync(true);
         _personConnectionRepositoryMock.Setup(pcr =>
-                pcr.DoesConnectionExistsAsync(command.PersonId, command.OtherPersonId, It.IsAny<CancellationToken>()))
+                pcr.DoesConnectionExistsAsync(command.PersonId, command.OtherPersonId, command.ConnectionType,
+                    It.IsAny<CancellationToken>()))
             .ReturnsAsync(false);
 
         // Act
