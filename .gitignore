@@ -52,3 +52,6 @@ _ReSharper.Caches/
 # Temporary files
 Thumbs.db
 desktop.ini
+
+# Pictures folder
+pictures/

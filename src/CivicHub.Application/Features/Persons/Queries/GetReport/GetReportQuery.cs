@@ -3,4 +3,4 @@ using MediatR;
 
 namespace CivicHub.Application.Features.Persons.Queries.GetReport;
 
-public record GetReportQuery(string ConnectionType) : IRequest<Result<List<ReportResponse>>>;
+public record GetReportQuery() : IRequest<Result<List<ReportResponse>>>;

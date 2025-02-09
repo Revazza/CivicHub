@@ -1,6 +1,7 @@
 using AutoFixture;
 using CivicHub.Application.Features.Persons.Queries.GetFullInformation;
 using CivicHub.Application.Repositories;
+using CivicHub.Domain.Persons.Exceptions;
 using Moq;
 using NUnit.Framework;
 
@@ -26,19 +27,17 @@ public class GetFullInformationQueryHandlerTests
     }
 
     [Test]
-    public async Task When_PersonDoesNotExist_Then_ReturnsNull()
+    public void When_PersonDoesNotExist_Then_ThrowPersonDoesntExistException()
     {
         // Arrange
         var query = _fixture.Create<GetFullInformationQuery>();
 
-        _personRepositoryMock.Setup(x => x.GetPersonFullInformationAsync(query.PersonId, CancellationToken.None))
-            .ReturnsAsync((GetFullInformationResponse)null);
+        _personRepositoryMock.Setup(x => x.DoesExistAsync(query.PersonId, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(false);
 
         // Act
-        var result = await _handler.Handle(query, CancellationToken.None);
-
-        // Assert
-        Assert.That(result.Value, Is.Null);
+        Assert.ThrowsAsync<PersonDoesntExistException>(async () =>
+            await _handler.Handle(query, It.IsAny<CancellationToken>()));
     }
 
     [Test]
@@ -49,6 +48,9 @@ public class GetFullInformationQueryHandlerTests
 
         var info = _fixture.Create<GetFullInformationResponse>();
 
+        _personRepositoryMock.Setup(x => x.DoesExistAsync(query.PersonId, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(true);
+        
         _personRepositoryMock.Setup(x => x.GetPersonFullInformationAsync(query.PersonId, CancellationToken.None))
             .ReturnsAsync(info);
 

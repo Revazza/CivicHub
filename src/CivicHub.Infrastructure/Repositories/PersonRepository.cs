@@ -11,11 +11,14 @@ using Microsoft.EntityFrameworkCore;
 namespace CivicHub.Infrastructure.Repositories;
 
 public class PersonRepository(CivicHubContext context) :
-    GenericRepository<Person, int>(context),
+    GenericRepository<Person, long>(context),
     IPersonRepository
 {
     public async Task<bool> DoesExistAsync(string personalNumber, CancellationToken cancellationToken = default)
         => await Context.Persons.AnyAsync(x => x.PersonalNumber == personalNumber, cancellationToken);
+
+    public async Task<bool> DoesExistAsync(long personId, CancellationToken cancellationToken = default)
+        => await Context.Persons.AnyAsync(x => x.Id == personId, cancellationToken);
 
     public async Task<Person> GetForUpdateAsync(
         string personalNumber,

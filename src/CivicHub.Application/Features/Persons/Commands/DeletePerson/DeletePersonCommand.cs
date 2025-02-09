@@ -3,4 +3,4 @@ using MediatR;
 
 namespace CivicHub.Application.Features.Persons.Commands.DeletePerson;
 
-public record DeletePersonCommand(string PersonalNumber) : IRequest<Result>;
+public record DeletePersonCommand(long PersonId) : IRequest<Result>;

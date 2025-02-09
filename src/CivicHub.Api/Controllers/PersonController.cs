@@ -3,6 +3,7 @@ using CivicHub.Application.Common.Results;
 using CivicHub.Application.Features.Persons.Commands.AddPerson;
 using CivicHub.Application.Features.Persons.Commands.DeletePerson;
 using CivicHub.Application.Features.Persons.Commands.UpdatePerson;
+using CivicHub.Application.Features.Persons.Commands.UploadPersonPicture;
 using CivicHub.Application.Features.Persons.Queries.DetailedSearchPerson;
 using CivicHub.Application.Features.Persons.Queries.GetFullInformation;
 using CivicHub.Application.Features.Persons.Queries.GetReport;
@@ -44,12 +45,12 @@ public class PersonController(IMediator mediator) : ControllerBase
     [HttpGet("search/simple")]
     public async Task<IActionResult> SearchPerson(
         [FromQuery] SimpleSearchPersonQuery query,
-        CancellationToken cancellationToken = default)  
+        CancellationToken cancellationToken = default)
     {
         var result = await mediator.Send(query, cancellationToken);
         return Ok(result);
     }
-    
+
     [ProducesResponseType(typeof(Result<PaginatedResult<ShortPersonResponse>>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(Result), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(Result), StatusCodes.Status500InternalServerError)]
@@ -61,7 +62,7 @@ public class PersonController(IMediator mediator) : ControllerBase
         var result = await mediator.Send(query, cancellationToken);
         return Ok(result);
     }
-    
+
     [ProducesResponseType(typeof(Result<ReportResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(Result), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(Result), StatusCodes.Status500InternalServerError)]
@@ -71,6 +72,19 @@ public class PersonController(IMediator mediator) : ControllerBase
         CancellationToken cancellationToken = default)
     {
         var result = await mediator.Send(query, cancellationToken);
+        return Ok(result);
+    }
+
+    [ProducesResponseType(typeof(Result), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Result), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(Result), StatusCodes.Status500InternalServerError)]
+    [HttpPost("picture")]
+    public async Task<IActionResult> UploadPersonPicture(
+        long personId,
+        [FromForm] IFormFile picture,
+        CancellationToken cancellationToken = default)
+    {
+        var result = await mediator.Send(new UploadPersonPictureCommand(personId, picture), cancellationToken);
         return Ok(result);
     }
 

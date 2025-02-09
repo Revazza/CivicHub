@@ -11,4 +11,8 @@ public static class PersonConstraints
     public const int LastNameMaxLength = 50;
     
     public const int PersonalNumberLength = 11;
+    
+    public const int PicturePathMaxLength = 1024;
+    
+    public const int PictureMaxSize = 10;
 }
