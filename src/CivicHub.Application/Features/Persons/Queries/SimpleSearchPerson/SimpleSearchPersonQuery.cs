@@ -5,8 +5,8 @@ using MediatR;
 namespace CivicHub.Application.Features.Persons.Queries.SimpleSearchPerson;
 
 public record SimpleSearchPersonQuery(
-    string FirstName,
-    string LastName,
-    string PersonalNumber,
     int PageSize,
-    int PageNumber) : IRequest<Result<PaginatedResult<ShortPersonResponse>>>;
+    int PageNumber,
+    string FirstName = null,
+    string LastName = null,
+    string PersonalNumber = null) : IRequest<Result<PaginatedResult<ShortPersonResponse>>>;
