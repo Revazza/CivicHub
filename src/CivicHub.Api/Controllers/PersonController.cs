@@ -3,6 +3,7 @@ using CivicHub.Application.Common.Results;
 using CivicHub.Application.Features.Persons.Commands.AddPerson;
 using CivicHub.Application.Features.Persons.Commands.DeletePerson;
 using CivicHub.Application.Features.Persons.Commands.UpdatePerson;
+using CivicHub.Application.Features.Persons.Queries.DetailedSearchPerson;
 using CivicHub.Application.Features.Persons.Queries.GetFullInformation;
 using CivicHub.Application.Features.Persons.Queries.SimpleSearchPerson;
 using MediatR;
@@ -39,9 +40,21 @@ public class PersonController(IMediator mediator) : ControllerBase
     [ProducesResponseType(typeof(Result<List<ShortPersonResponse>>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(Result), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(Result), StatusCodes.Status500InternalServerError)]
-    [HttpGet("search")]
+    [HttpGet("search/simple")]
     public async Task<IActionResult> SearchPerson(
         [FromQuery] SimpleSearchPersonQuery query,
+        CancellationToken cancellationToken = default)  
+    {
+        var result = await mediator.Send(query, cancellationToken);
+        return Ok(result);
+    }
+    
+    [ProducesResponseType(typeof(Result<List<ShortPersonResponse>>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Result), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(Result), StatusCodes.Status500InternalServerError)]
+    [HttpGet("search/detailed")]
+    public async Task<IActionResult> SearchPerson(
+        [FromQuery] DetailedSearchPersonQuery query,
         CancellationToken cancellationToken = default)
     {
         var result = await mediator.Send(query, cancellationToken);
