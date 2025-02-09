@@ -4,6 +4,7 @@ using CivicHub.Api.Middlewares;
 using CivicHub.Application;
 using CivicHub.Infrastructure;
 using CivicHub.Persistance;
+using Microsoft.Extensions.Options;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,6 +34,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
+app.UseMiddleware<CultureMiddleware>();
 app.UseMiddleware<CorrelationMiddleware>();
 app.UseMiddleware<GlobalExceptionLoggingMiddleware>();
 app.UseHttpsRedirection();
