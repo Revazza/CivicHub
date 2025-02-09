@@ -5,6 +5,7 @@ using CivicHub.Application.Features.Persons.Commands.DeletePerson;
 using CivicHub.Application.Features.Persons.Commands.UpdatePerson;
 using CivicHub.Application.Features.Persons.Queries.DetailedSearchPerson;
 using CivicHub.Application.Features.Persons.Queries.GetFullInformation;
+using CivicHub.Application.Features.Persons.Queries.GetReport;
 using CivicHub.Application.Features.Persons.Queries.SimpleSearchPerson;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -37,7 +38,7 @@ public class PersonController(IMediator mediator) : ControllerBase
         return Ok(result);
     }
 
-    [ProducesResponseType(typeof(Result<List<ShortPersonResponse>>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Result<PaginatedResult<ShortPersonResponse>>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(Result), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(Result), StatusCodes.Status500InternalServerError)]
     [HttpGet("search/simple")]
@@ -49,12 +50,24 @@ public class PersonController(IMediator mediator) : ControllerBase
         return Ok(result);
     }
     
-    [ProducesResponseType(typeof(Result<List<ShortPersonResponse>>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Result<PaginatedResult<ShortPersonResponse>>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(Result), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(Result), StatusCodes.Status500InternalServerError)]
     [HttpGet("search/detailed")]
     public async Task<IActionResult> SearchPerson(
         [FromQuery] DetailedSearchPersonQuery query,
+        CancellationToken cancellationToken = default)
+    {
+        var result = await mediator.Send(query, cancellationToken);
+        return Ok(result);
+    }
+    
+    [ProducesResponseType(typeof(Result<ReportResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Result), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(Result), StatusCodes.Status500InternalServerError)]
+    [HttpGet("report")]
+    public async Task<IActionResult> GetReport(
+        [FromQuery] GetReportQuery query,
         CancellationToken cancellationToken = default)
     {
         var result = await mediator.Send(query, cancellationToken);
