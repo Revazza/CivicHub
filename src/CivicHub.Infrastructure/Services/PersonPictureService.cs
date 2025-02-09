@@ -1,4 +1,6 @@
+using System.Text.RegularExpressions;
 using CivicHub.Application.Common.Services;
+using CivicHub.Infrastructure.Helpers;
 using Microsoft.AspNetCore.Http;
 
 namespace CivicHub.Infrastructure.Services;
@@ -40,7 +42,7 @@ public class PersonPictureService : IPersonPictureService
     private static string GetFullPath(long personId, string folderPath, IFormFile file)
     {
         var extension = Path.GetExtension(file.FileName);
-        var fileName = CreateFileName(personId, extension);
+        var fileName = FileHelper.SanitizeFileName(CreateFileName(personId, extension));
         return Path.Combine(folderPath, fileName);
     }
 }
