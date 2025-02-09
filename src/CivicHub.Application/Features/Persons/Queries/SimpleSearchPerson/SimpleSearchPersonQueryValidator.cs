@@ -1,10 +1,8 @@
 using CivicHub.Application.Common.Extensions;
-using CivicHub.Application.Features.Persons.Common.Validators;
-using CivicHub.Application.Features.Persons.Queries.SimpleSearchPerson;
 using CivicHub.Domain.Persons;
 using FluentValidation;
 
-namespace CivicHub.Application.Features.Persons.Queries.Common.Validators;
+namespace CivicHub.Application.Features.Persons.Queries.SimpleSearchPerson;
 
 public class SimpleSearchPersonQueryValidator : AbstractValidator<SimpleSearchPersonQuery>
 {
@@ -15,15 +13,15 @@ public class SimpleSearchPersonQueryValidator : AbstractValidator<SimpleSearchPe
     public SimpleSearchPersonQueryValidator()
     {
         RuleFor(person => person.FirstName)
-            .SetValidator(new FirstNameValidator())
+            .MaximumLength(PersonConstraints.FirstNameMaxLength)
             .When(person => person.FirstName.IsNotNullOrEmpty());
 
         RuleFor(person => person.LastName)
-            .SetValidator(new LastNameValidator())
+            .MaximumLength(PersonConstraints.LastNameMaxLength)
             .When(person => person.LastName.IsNotNullOrEmpty());
 
         RuleFor(person => person.PersonalNumber)
-            .SetValidator(new PersonalNumberValidator())
+            .MaximumLength(PersonConstraints.PersonalNumberLength)
             .When(person => person.PersonalNumber.IsNotNullOrEmpty());
 
         RuleFor(person => person.PageSize)

@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace CivicHub.Application.Features.Persons.Common.Validators;
+namespace CivicHub.Application.Features.Persons.Commands.Common.Validators;
 
 public class AgeValidator : AbstractValidator<DateTime>
 {

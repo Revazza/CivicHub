@@ -3,7 +3,7 @@ using CivicHub.Domain.Cities;
 using CivicHub.Domain.Persons;
 using FluentValidation;
 
-namespace CivicHub.Application.Features.Persons.Common.Validators;
+namespace CivicHub.Application.Features.Persons.Commands.Common.Validators;
 
 public class CityCodeValidator : AbstractValidator<string>
 {
