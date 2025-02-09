@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using CivicHub.Application.Common.Responses;
 using CivicHub.Application.Features.Persons.Queries.GetFullInformation;
+using CivicHub.Application.Features.Persons.Queries.GetReport;
 using CivicHub.Application.Repositories;
 using CivicHub.Domain.Persons;
 using CivicHub.Persistance.Contexts.CivicHubContexts;
@@ -38,6 +39,7 @@ public class PersonRepository(CivicHubContext context) :
 
         var persons = await Context
             .Persons
+            .AsNoTracking()
             .Where(x => x.Id == personId || x.Id == otherPersonId)
             .ToListAsync(cancellationToken);
 
@@ -77,4 +79,20 @@ public class PersonRepository(CivicHubContext context) :
         Expression<Func<Person, bool>> expression,
         CancellationToken cancellationToken = default)
         => await Context.Persons.AsNoTracking().Where(expression).CountAsync(cancellationToken);
+
+    public async Task<List<ReportResponse>> GetConnectionReportAsync(CancellationToken cancellationToken = default)
+        => await Context
+            .Persons
+            .AsNoTracking()
+            .AsSplitQuery()
+            .Include(person => person.Connections)
+            .Select(person => new ReportResponse(
+                person.Id,
+                $"{person.FirstName} {person.LastName}",
+                person.Connections
+                    .Select(x => x.ConnectionType)
+                    .GroupBy(connectionType => connectionType)
+                    .Select(group => new PersonConnectionStatistics(group.Key, group.Count())).ToList()
+            ))
+            .ToListAsync(cancellationToken);
 }

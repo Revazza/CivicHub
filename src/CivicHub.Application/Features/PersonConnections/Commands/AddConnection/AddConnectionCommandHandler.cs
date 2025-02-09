@@ -3,6 +3,7 @@ using CivicHub.Application.Repositories;
 using CivicHub.Domain.Persons.Entities.PersonConnections;
 using CivicHub.Domain.Persons.Entities.PersonConnections.Exceptions;
 using CivicHub.Domain.Persons.Exceptions;
+using Mapster;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -15,12 +16,7 @@ public class AddConnectionCommandHandler(IUnitOfWork unitOfWork, ILogger<AddConn
     {
         await ValidateAsync(request, cancellationToken);
 
-        var connection = new PersonConnection
-        {
-            Id = Guid.NewGuid(),
-            PersonId = request.PersonId,
-            ConnectedPersonId = request.OtherPersonId
-        };
+        var connection = request.Adapt<PersonConnection>();
 
         await unitOfWork.PersonConnectionRepository.InsertAsync(connection, cancellationToken);
         await unitOfWork.SaveChangesAsync(cancellationToken);
@@ -54,6 +50,7 @@ public class AddConnectionCommandHandler(IUnitOfWork unitOfWork, ILogger<AddConn
         var exists = await unitOfWork.PersonConnectionRepository.DoesConnectionExistsAsync(
             request.PersonId,
             request.OtherPersonId,
+            request.ConnectionType,
             cancellationToken);
 
         if (exists)

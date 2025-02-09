@@ -1,3 +1,4 @@
+using CivicHub.Domain.Persons.Entities.PersonConnections;
 using FluentValidation;
 
 namespace CivicHub.Application.Features.PersonConnections.Commands.AddConnection;
@@ -15,5 +16,9 @@ public class AddConnectionCommandValidator : AbstractValidator<AddConnectionComm
         RuleFor(request => request)
             .Must(request => request.PersonId != request.OtherPersonId)
             .WithMessage("PersonId must not be equal to other personId");
+
+        RuleFor(request => request.ConnectionType)
+            .NotEmpty()
+            .MaximumLength(PersonConnectionConstraints.MaxConnectionTypeLength);
     }
 }

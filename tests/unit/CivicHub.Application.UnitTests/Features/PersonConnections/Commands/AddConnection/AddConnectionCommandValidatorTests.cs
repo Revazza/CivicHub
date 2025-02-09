@@ -24,6 +24,7 @@ public class AddConnectionCommandValidatorTests
         var command = _fixture.Build<AddConnectionCommand>()
             .With(x => x.PersonId, 1)
             .With(x => x.OtherPersonId, 2)
+            .With(x => x.ConnectionType, "SomeConnectionType")
             .Create();
         
         var result = _validator.TestValidate(command);
