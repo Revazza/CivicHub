@@ -9,5 +9,6 @@ public interface IPersonConnectionRepository : IGenericRepository<PersonConnecti
     Task<bool> DoesConnectionExistsAsync(
         long personId,
         long connectedPersonId,
+        string connectionType,
         CancellationToken cancellationToken = default);
 }

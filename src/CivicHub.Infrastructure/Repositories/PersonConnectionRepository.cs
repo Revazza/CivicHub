@@ -1,13 +1,13 @@
 using CivicHub.Application.Repositories;
 using CivicHub.Domain.Persons.Entities.PersonConnections;
 using CivicHub.Persistance.Contexts.CivicHubContexts;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace CivicHub.Infrastructure.Repositories;
 
 public class PersonConnectionRepository(CivicHubContext context)
-    : GenericRepository<PersonConnection, Guid>(context), IPersonConnectionRepository
+    : GenericRepository<PersonConnection, Guid>(context),
+        IPersonConnectionRepository
 {
     public async Task ExecuteDeleteAsync(long personId, CancellationToken cancellationToken)
         => await Context
@@ -19,13 +19,15 @@ public class PersonConnectionRepository(CivicHubContext context)
     {
         var ok = Context.Persons.AsQueryable();
     }
-    
+
     public async Task<bool> DoesConnectionExistsAsync(
         long personId,
         long connectedPersonId,
+        string connectionType,
         CancellationToken cancellationToken = default)
-        => await Context.PersonConnections.AnyAsync(x =>
-                (x.PersonId == personId && x.ConnectedPersonId == connectedPersonId) ||
-                (x.PersonId == connectedPersonId && x.ConnectedPersonId == personId),
+        => await Context.PersonConnections.AnyAsync(connection =>
+                ((connection.PersonId == personId && connection.ConnectedPersonId == connectedPersonId) ||
+                 (connection.PersonId == connectedPersonId && connection.ConnectedPersonId == personId)) &&
+                connection.ConnectionType == connectionType,
             cancellationToken);
 }
