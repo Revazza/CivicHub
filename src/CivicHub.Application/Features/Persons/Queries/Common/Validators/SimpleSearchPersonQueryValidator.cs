@@ -1,8 +1,9 @@
 using CivicHub.Application.Common.Extensions;
+using CivicHub.Application.Features.Persons.Queries.SimpleSearchPerson;
 using CivicHub.Domain.Persons;
 using FluentValidation;
 
-namespace CivicHub.Application.Features.Persons.Queries.SimpleSearchPerson;
+namespace CivicHub.Application.Features.Persons.Queries.Common.Validators;
 
 public class SimpleSearchPersonQueryValidator : AbstractValidator<SimpleSearchPersonQuery>
 {

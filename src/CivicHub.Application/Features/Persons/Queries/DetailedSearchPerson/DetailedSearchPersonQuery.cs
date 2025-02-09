@@ -1,7 +1,5 @@
-using CivicHub.Application.Common.Responses;
-using CivicHub.Application.Common.Results;
+using CivicHub.Application.Features.Persons.Queries.SimpleSearchPerson;
 using CivicHub.Domain.Persons.Enums;
-using MediatR;
 
 namespace CivicHub.Application.Features.Persons.Queries.DetailedSearchPerson;
 
@@ -16,4 +14,4 @@ public record DetailedSearchPersonQuery(
     Gender Gender = Gender.NotSpecified,
     DateTime BirthDateFrom = default,
     DateTime BirthDateTo = default
-) : IRequest<Result<PaginatedResult<ShortPersonResponse>>>;
+) : SimpleSearchPersonQuery(PageSize, PageNumber, FirstName, LastName, PersonalNumber);
