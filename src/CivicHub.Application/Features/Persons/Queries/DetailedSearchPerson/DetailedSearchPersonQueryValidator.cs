@@ -14,10 +14,12 @@ public class DetailedSearchPersonQueryValidator : AbstractValidator<DetailedSear
         
         RuleFor(x => x.CityName)
             .MaximumLength(CityConstraints.MaxCityNameLength)
+            .MustBeEnglishOrGeorgian()
             .When(x => x.CityName.IsNotNullOrEmpty());
 
         RuleFor(x => x.CityCode)
             .MaximumLength(CityConstraints.MaxCityCodeLength)
+            .MustBeEnglish()
             .When(x => x.CityCode.IsNotNullOrEmpty());
     }
 }

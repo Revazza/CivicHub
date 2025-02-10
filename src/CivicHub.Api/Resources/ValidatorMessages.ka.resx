@@ -50,4 +50,31 @@
     <data name="PersonalNumber" xml:space="preserve">
         <value>პირადი ნომერი</value>
     </data>
+    <data name="GenderMustBeSpecified" xml:space="preserve">
+        <value>სქესის არჩევა სავალდებულოა</value>
+    </data>
+    <data name="Gender" xml:space="preserve">
+        <value>სქესი</value>
+    </data>
+    <data name="MustBeAdult" xml:space="preserve">
+        <value>უნდა იყოს 18 წელს გადაცილებული </value>
+    </data>
+    <data name="MagicNumberEntered" xml:space="preserve">
+        <value>არა რეალური ციფრია შეყვანილი</value>
+    </data>
+    <data name="PhoneType" xml:space="preserve">
+        <value>ტელეფონის ტიპი</value>
+    </data>
+    <data name="FirstAndLastNameDontHaveMatchingLanguages" xml:space="preserve">
+        <value>სახელი და გვარი ერთ ენაზე უნდა იყოს შეყვანილი</value>
+    </data>
+    <data name="PersonId" xml:space="preserve">
+        <value>ფიზიკური პირის იდენთიფიკატორი</value>
+    </data>
+    <data name="PageSize" xml:space="preserve">
+        <value>გვერდის სიდიდე</value>
+    </data>
+    <data name="PageNumber" xml:space="preserve">
+        <value>გვერდის ნომერი</value>
+    </data>
 </root>

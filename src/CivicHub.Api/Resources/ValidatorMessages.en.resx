@@ -50,4 +50,31 @@
     <data name="PersonalNumber" xml:space="preserve">
         <value>Personal number</value>
     </data>
+    <data name="GenderMustBeSpecified" xml:space="preserve">
+        <value>Gender must be specified</value>
+    </data>
+    <data name="Gender" xml:space="preserve">
+        <value>Gender</value>
+    </data>
+    <data name="MustBeAdult" xml:space="preserve">
+        <value>Must be over 18 years old</value>
+    </data>
+    <data name="MagicNumberEntered" xml:space="preserve">
+        <value>Magic number entered</value>
+    </data>
+    <data name="PhoneType" xml:space="preserve">
+        <value>Phone type</value>
+    </data>
+    <data name="FirstAndLastNameDontHaveMatchingLanguages" xml:space="preserve">
+        <value>First name and last name must be same language</value>
+    </data>
+    <data name="PersonId" xml:space="preserve">
+        <value>Person id</value>
+    </data>
+    <data name="PageSize" xml:space="preserve">
+        <value>Page size</value>
+    </data>
+    <data name="PageNumber" xml:space="preserve">
+        <value>Page number</value>
+    </data>
 </root>

@@ -23,6 +23,7 @@ public class SimpleSearchPersonQueryValidator : AbstractValidator<SimpleSearchPe
 
         RuleFor(person => person.PersonalNumber)
             .MaximumLength(PersonConstraints.PersonalNumberLength)
+            .MustContainOnlyDigits()
             .When(person => person.PersonalNumber.IsNotNullOrEmpty());
 
         RuleFor(person => person.PageSize)

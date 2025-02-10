@@ -13,9 +13,9 @@ public class AgeValidator : AbstractValidator<DateTime>
         RuleFor(birthDate => birthDate)
             .Must(IsAdult)
             .WithName(ValidatorMessagesKeys.Age)
-            .WithMessage("must be at least 18 years old")
+            .WithMessage(ValidatorMessagesKeys.MustBeAdult)
             .Must(IsMagicAge)
-            .WithMessage("magic age entered");
+            .WithMessage(ValidatorMessagesKeys.MagicNumberEntered);
     }
 
     private static bool IsAdult(DateTime birthDate) => birthDate <= DateTime.UtcNow.AddYears(-ValidAge);

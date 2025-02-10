@@ -1,4 +1,4 @@
-using CivicHub.Application.Features.Persons.Commands.Common.Extensions;
+using CivicHub.Application.Common.Extensions;
 using CivicHub.Domain.Persons;
 using FluentValidation;
 

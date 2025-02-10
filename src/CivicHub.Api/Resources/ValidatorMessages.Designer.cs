@@ -98,6 +98,15 @@ namespace CivicHub.Api.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string FirstAndLastNameDontHaveMatchingLanguages {
+            get {
+                return ResourceManager.GetString("FirstAndLastNameDontHaveMatchingLanguages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string FirstName {
             get {
                 return ResourceManager.GetString("FirstName", resourceCulture);
@@ -107,9 +116,45 @@ namespace CivicHub.Api.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string Gender {
+            get {
+                return ResourceManager.GetString("Gender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string GenderMustBeSpecified {
+            get {
+                return ResourceManager.GetString("GenderMustBeSpecified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string LastName {
             get {
                 return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MagicNumberEntered {
+            get {
+                return ResourceManager.GetString("MagicNumberEntered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MustBeAdult {
+            get {
+                return ResourceManager.GetString("MustBeAdult", resourceCulture);
             }
         }
         
@@ -152,9 +197,36 @@ namespace CivicHub.Api.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string PageNumber {
+            get {
+                return ResourceManager.GetString("PageNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string PageSize {
+            get {
+                return ResourceManager.GetString("PageSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string PersonalNumber {
             get {
                 return ResourceManager.GetString("PersonalNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string PersonId {
+            get {
+                return ResourceManager.GetString("PersonId", resourceCulture);
             }
         }
         
@@ -173,6 +245,15 @@ namespace CivicHub.Api.Resources {
         internal static string PhoneNumber {
             get {
                 return ResourceManager.GetString("PhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string PhoneType {
+            get {
+                return ResourceManager.GetString("PhoneType", resourceCulture);
             }
         }
     }

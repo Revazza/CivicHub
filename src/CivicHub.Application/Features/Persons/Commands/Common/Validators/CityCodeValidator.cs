@@ -1,5 +1,5 @@
+using CivicHub.Application.Common.Extensions;
 using CivicHub.Application.Common.Localization;
-using CivicHub.Application.Features.Persons.Commands.Common.Extensions;
 using CivicHub.Domain.Cities;
 using FluentValidation;
 
