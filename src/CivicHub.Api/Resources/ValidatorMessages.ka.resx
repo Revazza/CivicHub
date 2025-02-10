@@ -77,4 +77,10 @@
     <data name="PageNumber" xml:space="preserve">
         <value>გვერდის ნომერი</value>
     </data>
+    <data name="FileSizeExceeded" xml:space="preserve">
+        <value>ფაილის სიდიდე არ უნდა აღემატებოდეს {0} MB</value>
+    </data>
+    <data name="InvalidFileType" xml:space="preserve">
+        <value>არა ვალიდური ფაილის ტიპი. მხოლოდ .png არის ვალიდური</value>
+    </data>
 </root>

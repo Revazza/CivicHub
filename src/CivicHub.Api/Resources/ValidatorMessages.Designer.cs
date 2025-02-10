@@ -98,6 +98,15 @@ namespace CivicHub.Api.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string FileSizeExceeded {
+            get {
+                return ResourceManager.GetString("FileSizeExceeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string FirstAndLastNameDontHaveMatchingLanguages {
             get {
                 return ResourceManager.GetString("FirstAndLastNameDontHaveMatchingLanguages", resourceCulture);
@@ -128,6 +137,15 @@ namespace CivicHub.Api.Resources {
         internal static string GenderMustBeSpecified {
             get {
                 return ResourceManager.GetString("GenderMustBeSpecified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string InvalidFileType {
+            get {
+                return ResourceManager.GetString("InvalidFileType", resourceCulture);
             }
         }
         

@@ -77,4 +77,10 @@
     <data name="PageNumber" xml:space="preserve">
         <value>Page number</value>
     </data>
+    <data name="FileSizeExceeded" xml:space="preserve">
+        <value>File size must not exceed {0} MB</value>
+    </data>
+    <data name="InvalidFileType" xml:space="preserve">
+        <value>Invalid file type. Only .png is allowed</value>
+    </data>
 </root>

@@ -84,4 +84,10 @@
     <data name="PageNumber" xml:space="preserve">
         <value />
     </data>
+    <data name="FileSizeExceeded" xml:space="preserve">
+        <value />
+    </data>
+    <data name="InvalidFileType" xml:space="preserve">
+        <value />
+    </data>
 </root>

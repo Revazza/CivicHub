@@ -1,3 +1,4 @@
+using CivicHub.Application.Common.Localization;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 
@@ -14,15 +15,15 @@ public class FileValidator : AbstractValidator<IFormFile>
     {
         RuleFor(file => file.Length)
             .LessThanOrEqualTo(MaxFileSize)
-            .WithMessage("File size must not exceed 10 MB.");
+            .WithMessage(ValidatorMessagesKeys.FileSizeExceeded);
 
         RuleFor(file => file.FileName)
             .Must(BeAValidExtension)
-            .WithMessage($"Invalid file type. Only {string.Join(",", AllowedFileExtensions)} is allowed)");
+            .WithMessage(ValidatorMessagesKeys.InvalidFileType);
 
         RuleFor(file => file.FileName)
-            .Length(1, MaxFileNameLength)
-            .WithMessage($"File name must be between 1 and {MaxFileNameLength} characters.");
+            .MinimumLength(1)
+            .MaximumLength(MaxFileNameLength);
     }
 
     private static bool BeAValidExtension(string fileName)
