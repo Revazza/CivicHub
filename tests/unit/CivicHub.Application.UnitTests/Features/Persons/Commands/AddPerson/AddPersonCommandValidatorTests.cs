@@ -28,7 +28,7 @@ public class AddPersonCommandValidatorTests
             .With(c => c.PersonalNumber, "11111111111")
             .With(c => c.BirthDate, new DateTime(2000, 01, 01))
             .With(c => c.CityCode, "TB")
-            .With(c => c.PhoneNumbers, [new PhoneNumberDto("995", "568", "117764", PhoneType.Home)]);
+            .With(c => c.PhoneNumbers, [new PhoneNumberDto("117764", PhoneType.Home)]);
     }
 
     [Order(0)]
@@ -162,12 +162,11 @@ public class AddPersonCommandValidatorTests
     [TestCase("  ")]
     [TestCase("a")]
     [TestCase("123a")]
-    [TestCase("123456789876554")]
     public void When_PhoneNumbersNumberIsInvalid_Then_ValidationFails(string number)
     {
         // Arrange
         var command = _validCommandComposer
-            .With(c => c.PhoneNumbers, [new PhoneNumberDto("995", "568", number, PhoneType.Home)])
+            .With(c => c.PhoneNumbers, [new PhoneNumberDto(number, PhoneType.Home)])
             .Create();
 
         // Act

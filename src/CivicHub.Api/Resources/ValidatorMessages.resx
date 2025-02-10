@@ -90,4 +90,7 @@
     <data name="InvalidFileType" xml:space="preserve">
         <value />
     </data>
+    <data name="PhoneNumbersTypesMustBeUnique" xml:space="preserve">
+        <value />
+    </data>
 </root>

@@ -33,4 +33,7 @@
     <data name="PersonDoesntExistByIdAndOtherPersonId" xml:space="preserve">
         <value />
     </data>
+    <data name="PhoneNumberDoesntExist" xml:space="preserve">
+        <value />
+    </data>
 </root>

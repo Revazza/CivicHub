@@ -9,4 +9,5 @@ internal static class DomainExceptionMessagesKeys
     public const string PersonDoesntExistById = "PersonDoesntExistById";
     public const string PersonDoesntExistByIdAndOtherPersonId = "PersonDoesntExistByIdAndOtherPersonId";
     public const string CityDoesntExist = "CityDoesntExist";
+    public const string PhoneNumberDoesntExist = "PhoneNumberDoesntExist";
 }

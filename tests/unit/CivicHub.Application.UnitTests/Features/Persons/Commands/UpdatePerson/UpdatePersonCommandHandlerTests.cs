@@ -235,7 +235,7 @@ public class UpdatePersonCommandHandlerTests
         const PhoneType existedPhoneType = PhoneType.Mobile;
 
         var command = _commandComposer
-            .With(c => c.PhoneNumbers, [new PhoneNumberDto("CountryCode", "AreaCode", "Number", requestedPhoneType)])
+            .With(c => c.PhoneNumbers, [new PhoneNumberDto("Number", requestedPhoneType)])
             .Create();
 
         var person = _personComposer

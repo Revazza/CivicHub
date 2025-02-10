@@ -1,4 +1,5 @@
 using CivicHub.Domain.Persons.Entities.PersonConnections;
+using CivicHub.Persistance.Constants;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -24,6 +25,8 @@ public class PersonConnectionsConfigurations : IEntityTypeConfiguration<PersonCo
         builder.HasIndex(x => new { x.PersonId, x.ConnectedPersonId, x.ConnectionType })
             .IsUnique();
 
-        builder.Property(x => x.ConnectionType).HasMaxLength(PersonConnectionConstraints.MaxConnectionTypeLength);
+        builder.Property(x => x.ConnectionType)
+            .UseCollation(DatabaseCollations.CaseInsensitiveCollation)
+            .HasMaxLength(PersonConnectionConstraints.MaxConnectionTypeLength);
     }
 }

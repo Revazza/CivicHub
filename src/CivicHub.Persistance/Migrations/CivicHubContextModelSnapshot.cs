@@ -26,12 +26,14 @@ namespace CivicHub.Persistance.Migrations
                 {
                     b.Property<string>("Code")
                         .HasMaxLength(3)
-                        .HasColumnType("nvarchar(3)");
+                        .HasColumnType("nvarchar(3)")
+                        .UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
                     b.HasKey("Code");
 
@@ -60,7 +62,8 @@ namespace CivicHub.Persistance.Migrations
 
                     b.Property<string>("ConnectionType")
                         .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(30)")
+                        .UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
                     b.Property<long>("PersonId")
                         .HasColumnType("bigint");
@@ -88,12 +91,16 @@ namespace CivicHub.Persistance.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CityCode")
-                        .HasColumnType("nvarchar(3)");
+                        .IsRequired()
+                        .HasMaxLength(3)
+                        .HasColumnType("nvarchar(3)")
+                        .UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
+                        .UseCollation("SQL_Latin1_General_CP1_CI_AS")
                         .HasAnnotation("MinLength", 2);
 
                     b.Property<int>("Gender")
@@ -103,6 +110,7 @@ namespace CivicHub.Persistance.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
+                        .UseCollation("SQL_Latin1_General_CP1_CI_AS")
                         .HasAnnotation("MinLength", 2);
 
                     b.Property<string>("PersonalNumber")
@@ -151,7 +159,9 @@ namespace CivicHub.Persistance.Migrations
                 {
                     b.HasOne("CivicHub.Domain.Cities.City", "City")
                         .WithMany()
-                        .HasForeignKey("CityCode");
+                        .HasForeignKey("CityCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.OwnsMany("CivicHub.Domain.Persons.ValueObjects.PhoneNumbers.PhoneNumber", "PhoneNumbers", b1 =>
                         {
@@ -163,16 +173,6 @@ namespace CivicHub.Persistance.Migrations
                                 .HasColumnType("int");
 
                             SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<int>("Id"));
-
-                            b1.Property<string>("AreaCode")
-                                .IsRequired()
-                                .HasMaxLength(5)
-                                .HasColumnType("nvarchar(5)");
-
-                            b1.Property<string>("CountryCode")
-                                .IsRequired()
-                                .HasMaxLength(3)
-                                .HasColumnType("nvarchar(3)");
 
                             b1.Property<string>("Number")
                                 .IsRequired()

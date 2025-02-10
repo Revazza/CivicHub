@@ -269,6 +269,15 @@ namespace CivicHub.Api.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string PhoneNumbersTypesMustBeUnique {
+            get {
+                return ResourceManager.GetString("PhoneNumbersTypesMustBeUnique", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string PhoneType {
             get {
                 return ResourceManager.GetString("PhoneType", resourceCulture);
