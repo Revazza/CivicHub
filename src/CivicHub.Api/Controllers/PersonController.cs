@@ -75,7 +75,7 @@ public class PersonController(IMediator mediator) : ControllerBase
         return Ok(result);
     }
 
-    [ProducesResponseType(typeof(Result), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Result<string>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(Result), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(Result), StatusCodes.Status500InternalServerError)]
     [HttpPost("picture")]
