@@ -32,14 +32,6 @@ public class PersonConfigurations : IEntityTypeConfiguration<Person>
 
         builder.OwnsMany(x => x.PhoneNumbers, phone =>
         {
-            phone.Property(p => p.CountryCode)
-                .HasMaxLength(PhoneNumberConstraints.MaxCountryCodeLength)
-                .IsRequired();
-            
-            phone.Property(p => p.AreaCode)
-                .HasMaxLength(PhoneNumberConstraints.MaxAreaCodeLength)
-                .IsRequired();
-            
             phone.Property(p => p.Number)
                 .HasMaxLength(PhoneNumberConstraints.MaxNumberLength)
                 .IsRequired();

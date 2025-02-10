@@ -93,8 +93,6 @@ public class UpdatePersonCommandHandler(IUnitOfWork unitOfWork, ILogger<UpdatePe
                                   ?? throw new PhoneNumberDoesntExistException(phoneNumberDto.Type);
 
         phoneNumberToUpdate.Number = phoneNumberDto.Number;
-        phoneNumberToUpdate.CountryCode = phoneNumberDto.CountryCode;
-        phoneNumberToUpdate.AreaCode = phoneNumberDto.AreaCode;
 
         logger.LogInformation("{PropertyName} of type {Type} is updated", nameof(Person.PhoneNumbers)
             , phoneNumberToUpdate.Type);

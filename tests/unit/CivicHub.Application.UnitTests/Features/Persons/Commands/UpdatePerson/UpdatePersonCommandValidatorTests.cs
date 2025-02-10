@@ -154,42 +154,6 @@ public class UpdatePersonCommandValidatorTests
     }
 
     [TestCase("")]
-    [TestCase("  ")]
-    [TestCase("a")]
-    [TestCase("1234567")]
-    public void When_PhoneNumbersCountryIsInvalid_Then_ValidationFails(string countryCode)
-    {
-        // Arrange
-        var command = _validCommandComposer
-            .With(c => c.PhoneNumbers, [new PhoneNumberDto(countryCode, "568", "117764", PhoneType.Home)])
-            .Create();
-
-        // Act
-        var result = _validator.TestValidate(command);
-
-        // Assert
-        result.ShouldHaveValidationErrorFor($"PhoneNumbers[0].{nameof(PhoneNumberDto.CountryCode)}");
-    }
-
-    [TestCase("")]
-    [TestCase("  ")]
-    [TestCase("a")]
-    [TestCase("1234567")]
-    public void When_PhoneNumbersAreaCodeIsInvalid_Then_ValidationFails(string areaCode)
-    {
-        // Arrange
-        var command = _validCommandComposer
-            .With(c => c.PhoneNumbers, [new PhoneNumberDto("995", areaCode, "117764", PhoneType.Home)])
-            .Create();
-
-        // Act
-        var result = _validator.TestValidate(command);
-
-        // Assert
-        result.ShouldHaveValidationErrorFor($"PhoneNumbers[0].{nameof(PhoneNumberDto.AreaCode)}");
-    }
-
-    [TestCase("")]
     [TestCase(null)]
     [TestCase("  ")]
     [TestCase("a")]
