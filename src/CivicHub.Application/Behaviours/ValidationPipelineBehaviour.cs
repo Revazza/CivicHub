@@ -1,5 +1,5 @@
+using CivicHub.Application.Common.Localization;
 using CivicHub.Application.Common.Results;
-using CivicHub.Application.Common.Services;
 using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
@@ -9,7 +9,7 @@ namespace CivicHub.Application.Behaviours;
 
 public class ValidationPipelineBehaviour<TRequest, TResponse>(
     ILogger<ValidationPipelineBehaviour<TRequest, TResponse>> logger,
-    IValidationLocalizer validationLocalizer,
+    IValidationLocalizer localizer,
     IValidator<TRequest> validator = null)
     : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
@@ -47,8 +47,8 @@ public class ValidationPipelineBehaviour<TRequest, TResponse>(
     private Error CreateError(ValidationFailure validationFailure)
     {
         var propertyName = GetPropertyName(validationFailure);
-        var localizedPropertyValue = validationLocalizer.Translate(propertyName);
-        var localizedErrorMessage = validationLocalizer.Translate(
+        var localizedPropertyValue = localizer.Translate(propertyName);
+        var localizedErrorMessage = localizer.Translate(
             FormatErrorMessage(validationFailure),
             propertyName);
         var errorMessage = localizedErrorMessage.Replace(propertyName, localizedPropertyValue);
@@ -62,9 +62,6 @@ public class ValidationPipelineBehaviour<TRequest, TResponse>(
 
         return validationFailure.ErrorMessage.Replace(separator, emptySpace);
     }
-
-    private string GetLocalizedPropertyName(ValidationFailure validationFailure)
-        => validationLocalizer.Translate(GetPropertyName(validationFailure));
 
     private static string GetPropertyName(ValidationFailure validationFailure)
     {

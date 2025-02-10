@@ -1,7 +1,7 @@
 using System.Reflection;
 using CivicHub.Application.Behaviours;
 using CivicHub.Application.Common.Extensions;
-using CivicHub.Application.Common.Services;
+using CivicHub.Application.Common.Localization;
 using FluentValidation;
 using Mapster;
 using MediatR;

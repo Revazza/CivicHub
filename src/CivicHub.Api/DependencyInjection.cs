@@ -1,8 +1,10 @@
 using CivicHub.Api.ActionFilters;
+using CivicHub.Api.Contracts;
 using CivicHub.Api.Middlewares;
 using CivicHub.Api.Options;
+using CivicHub.Api.Resources;
 using CivicHub.Api.Services;
-using CivicHub.Application.Common.Services;
+using CivicHub.Application.Common.Localization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CivicHub.Api;
@@ -29,7 +31,7 @@ public static class DependencyInjection
             .SetDefaultCulture(options.DefaultCulture)
             .AddSupportedCultures(options.SupportedCultures.ToArray())
             .AddSupportedUICultures(options.SupportedCultures.ToArray());
-        
+
         app.UseRequestLocalization(localizationOptions);
     }
 
@@ -40,6 +42,7 @@ public static class DependencyInjection
         services.AddLocalization();
         services.AddScoped<LanguageMiddleware>();
         services.AddTransient<IValidationLocalizer, ValidationLocalizer>();
+        services.AddTransient<ILocalizer<DomainExceptionMessages>, Localizer<DomainExceptionMessages>>();
 
         var localizationOptions = configuration.GetSection(LocalizationOptions.SectionName).Get<LocalizationOptions>();
 

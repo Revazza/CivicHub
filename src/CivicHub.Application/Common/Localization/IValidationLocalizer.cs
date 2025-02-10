@@ -1,4 +1,4 @@
-namespace CivicHub.Application.Common.Services;
+namespace CivicHub.Application.Common.Localization;
 
 public interface IValidationLocalizer
 {

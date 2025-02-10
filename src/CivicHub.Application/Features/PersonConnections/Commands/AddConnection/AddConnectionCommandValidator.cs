@@ -1,4 +1,3 @@
-using CivicHub.Application.Common.Services;
 using CivicHub.Domain.Persons.Entities.PersonConnections;
 using FluentValidation;
 
@@ -6,7 +5,7 @@ namespace CivicHub.Application.Features.PersonConnections.Commands.AddConnection
 
 public class AddConnectionCommandValidator : AbstractValidator<AddConnectionCommand>
 {
-    public AddConnectionCommandValidator(IValidationLocalizer localizer)
+    public AddConnectionCommandValidator()
     {
         RuleFor(request => request.PersonId)
             .GreaterThan(0);
