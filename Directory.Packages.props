@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!--Common-->
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.3" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.3" />
@@ -12,6 +13,7 @@
     <!--Api-->
     <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.12" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageVersion Include="Respawn" Version="6.2.1" />
     <PackageVersion Include="Serilog.AspNetCore" Version="8.0.2" />
     <PackageVersion Include="Serilog.Enrichers.Thread" Version="4.0.0" />
     <PackageVersion Include="Serilog.Settings.Configuration" Version="8.0.4" />
@@ -38,5 +40,6 @@
     <PackageVersion Include="NUnit3TestAdapter" Version="4.6.0" />
     <PackageVersion Include="Moq" Version="4.20.72" />
     <PackageVersion Include="AutoFixture" Version="5.0.0-preview0012" />
+    <PackageVersion Include="Testcontainers.MsSql" Version="4.1.0" />
   </ItemGroup>
 </Project>

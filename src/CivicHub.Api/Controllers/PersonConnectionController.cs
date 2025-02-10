@@ -8,7 +8,7 @@ namespace CivicHub.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class PersonConnectionController(IMediator mediator) : ControllerBase
+public class PersonConnectionController(ISender mediator) : ControllerBase
 {
     [ProducesResponseType(typeof(Result), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(Result), StatusCodes.Status400BadRequest)]

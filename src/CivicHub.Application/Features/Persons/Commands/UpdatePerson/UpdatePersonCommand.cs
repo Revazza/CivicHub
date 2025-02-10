@@ -6,10 +6,10 @@ using MediatR;
 namespace CivicHub.Application.Features.Persons.Commands.UpdatePerson;
 
 public record UpdatePersonCommand(
-    string FirstName,
-    string LastName,
-    string PersonalNumber,
-    string CityCode,
-    Gender Gender,
-    DateTime BirthDate,
-    List<PhoneNumberDto> PhoneNumbers) : IRequest<Result>;
+    string FirstName = null,
+    string LastName = null,
+    string PersonalNumber = null,
+    string CityCode = null,
+    Gender Gender = Gender.NotSpecified,
+    DateTime BirthDate = default,
+    List<PhoneNumberDto> PhoneNumbers = null) : IRequest<Result>;

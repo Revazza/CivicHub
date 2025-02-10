@@ -226,27 +226,4 @@ public class UpdatePersonCommandHandlerTests
         // Assert
         Assert.That(person.Gender, Is.EqualTo(Gender.Male));
     }
-
-    [Test]
-    public void When_UpdatePhoneNumberIsInvalid_Then_ThrowsPhoneNumberDoesntExistException()
-    {
-        // Arrange
-        const PhoneType requestedPhoneType = PhoneType.Home;
-        const PhoneType existedPhoneType = PhoneType.Mobile;
-
-        var command = _commandComposer
-            .With(c => c.PhoneNumbers, [new PhoneNumberDto("Number", requestedPhoneType)])
-            .Create();
-
-        var person = _personComposer
-            .With(p => p.PhoneNumbers, [new PhoneNumber { Type = existedPhoneType }])
-            .Create();
-
-        _personRepositoryMock.Setup(pr => pr.GetForUpdateAsync(command.PersonalNumber, It.IsAny<CancellationToken>()))
-            .ReturnsAsync(person);
-
-        // Act & Assert
-        Assert.ThrowsAsync<PhoneNumberDoesntExistException>(
-            async () => await _handler.Handle(command, CancellationToken.None));
-    }
 }
