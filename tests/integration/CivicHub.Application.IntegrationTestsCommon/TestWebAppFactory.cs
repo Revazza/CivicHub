@@ -18,7 +18,7 @@ public class TestWebAppFactory : WebApplicationFactory<Program>
             
             services.AddDbContext<CivicHubContext>(options =>
             {
-                options.UseInMemoryDatabase("CivicHubDb");
+                options.UseInMemoryDatabase($"CivicHubDb{Guid.NewGuid()}");
             });
         });
     }
