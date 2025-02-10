@@ -103,5 +103,14 @@ namespace CivicHub.Api.Resources {
                 return ResourceManager.GetString("PersonDoesntExistByPersonalNumber", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string PhoneNumberDoesntExist {
+            get {
+                return ResourceManager.GetString("PhoneNumberDoesntExist", resourceCulture);
+            }
+        }
     }
 }

@@ -10,20 +10,6 @@ public class PhoneNumberDtoValidator : AbstractValidator<PhoneNumberDto>
 {
     public PhoneNumberDtoValidator()
     {
-        RuleFor(phone => phone.CountryCode)
-            .NotEmpty()
-            .WithName(ValidatorMessagesKeys.CountryCode)
-            .MinimumLength(PhoneNumberConstraints.MinCountryCodeLength)
-            .MaximumLength(PhoneNumberConstraints.MaxCountryCodeLength)
-            .MustContainOnlyDigits();
-
-        RuleFor(phone => phone.AreaCode)
-            .NotEmpty()
-            .WithName(ValidatorMessagesKeys.AreaCode)
-            .MinimumLength(PhoneNumberConstraints.MinAreaCodeLength)
-            .MaximumLength(PhoneNumberConstraints.MaxAreaCodeLength)
-            .MustContainOnlyDigits();
-
         RuleFor(phone => phone.Number)
             .NotEmpty()
             .WithName(ValidatorMessagesKeys.PhoneNumber)

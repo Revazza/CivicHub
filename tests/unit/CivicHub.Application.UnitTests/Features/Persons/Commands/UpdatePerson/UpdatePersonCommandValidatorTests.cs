@@ -28,7 +28,7 @@ public class UpdatePersonCommandValidatorTests
             .With(c => c.PersonalNumber, "11111111111")
             .With(c => c.BirthDate, new DateTime(2000, 01, 01))
             .With(c => c.CityCode, "TB")
-            .With(c => c.PhoneNumbers, [new PhoneNumberDto("995", "568", "117764", PhoneType.Home)]);
+            .With(c => c.PhoneNumbers, [new PhoneNumberDto("117764", PhoneType.Home)]);
     }
 
     [Order(0)]
@@ -154,52 +154,15 @@ public class UpdatePersonCommandValidatorTests
     }
 
     [TestCase("")]
-    [TestCase("  ")]
-    [TestCase("a")]
-    [TestCase("1234567")]
-    public void When_PhoneNumbersCountryIsInvalid_Then_ValidationFails(string countryCode)
-    {
-        // Arrange
-        var command = _validCommandComposer
-            .With(c => c.PhoneNumbers, [new PhoneNumberDto(countryCode, "568", "117764", PhoneType.Home)])
-            .Create();
-
-        // Act
-        var result = _validator.TestValidate(command);
-
-        // Assert
-        result.ShouldHaveValidationErrorFor($"PhoneNumbers[0].{nameof(PhoneNumberDto.CountryCode)}");
-    }
-
-    [TestCase("")]
-    [TestCase("  ")]
-    [TestCase("a")]
-    [TestCase("1234567")]
-    public void When_PhoneNumbersAreaCodeIsInvalid_Then_ValidationFails(string areaCode)
-    {
-        // Arrange
-        var command = _validCommandComposer
-            .With(c => c.PhoneNumbers, [new PhoneNumberDto("995", areaCode, "117764", PhoneType.Home)])
-            .Create();
-
-        // Act
-        var result = _validator.TestValidate(command);
-
-        // Assert
-        result.ShouldHaveValidationErrorFor($"PhoneNumbers[0].{nameof(PhoneNumberDto.AreaCode)}");
-    }
-
-    [TestCase("")]
     [TestCase(null)]
     [TestCase("  ")]
     [TestCase("a")]
     [TestCase("123a")]
-    [TestCase("123456789876554")]
     public void When_PhoneNumbersNumberIsInvalid_Then_ValidationFails(string number)
     {
         // Arrange
         var command = _validCommandComposer
-            .With(c => c.PhoneNumbers, [new PhoneNumberDto("995", "568", number, PhoneType.Home)])
+            .With(c => c.PhoneNumbers, [new PhoneNumberDto(number, PhoneType.Home)])
             .Create();
 
         // Act

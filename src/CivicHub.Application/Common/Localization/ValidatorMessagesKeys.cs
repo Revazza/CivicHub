@@ -11,8 +11,7 @@ public static class ValidatorMessagesKeys
     public const string MustBeEnglish = "MustBeEnglish"; 
     public const string CityCode = "CityCode"; 
     public const string Age = "Age"; 
-    public const string AreaCode = "AreaCode"; 
-    public const string CountryCode = "CountryCode"; 
+    public const string PhoneNumbersTypesMustBeUnique = "PhoneNumbersTypesMustBeUnique"; 
     public const string MustBeAdult = "MustBeAdult"; 
     public const string PhoneType = "PhoneType"; 
     public const string FileSizeExceeded = "FileSizeExceeded"; 

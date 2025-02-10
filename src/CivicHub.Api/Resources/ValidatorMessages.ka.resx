@@ -83,4 +83,7 @@
     <data name="InvalidFileType" xml:space="preserve">
         <value>არა ვალიდური ფაილის ტიპი. მხოლოდ .png არის ვალიდური</value>
     </data>
+    <data name="PhoneNumbersTypesMustBeUnique" xml:space="preserve">
+        <value>ტელეფონის ნომრის ტიპი უნდა იყოს უნიკალური</value>
+    </data>
 </root>

@@ -32,4 +32,7 @@
     <data name="PersonConnectionAlreadyExists" xml:space="preserve">
         <value>კავშირი '{0}' ფიზიკურ პირებს შორის უკვე არსებობს</value>
     </data>
+    <data name="PhoneNumberDoesntExist" xml:space="preserve">
+        <value>ნომრის ტიპი {0} არ არსებობს </value>
+    </data>
 </root>

@@ -6,7 +6,9 @@ using CivicHub.Domain.Cities.Exceptions;
 using CivicHub.Domain.Persons;
 using CivicHub.Domain.Persons.Enums;
 using CivicHub.Domain.Persons.Exceptions;
+using CivicHub.Domain.Persons.ValueObjects.PhoneNumbers;
 using CivicHub.Domain.Persons.ValueObjects.PhoneNumbers.Exceptions;
+using Mapster;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -15,7 +17,8 @@ namespace CivicHub.Application.Features.Persons.Commands.UpdatePerson;
 public class UpdatePersonCommandHandler(IUnitOfWork unitOfWork, ILogger<UpdatePersonCommandHandler> logger)
     : IRequestHandler<UpdatePersonCommand, Result>
 {
-    public async Task<Result> Handle(UpdatePersonCommand request,
+    public async Task<Result> Handle(
+        UpdatePersonCommand request,
         CancellationToken cancellationToken)
     {
         var person = await unitOfWork
@@ -89,12 +92,15 @@ public class UpdatePersonCommandHandler(IUnitOfWork unitOfWork, ILogger<UpdatePe
 
     private void UpdatePhoneNumbers(Person person, PhoneNumberDto phoneNumberDto)
     {
-        var phoneNumberToUpdate = person.PhoneNumbers.Find(phoneNumber => phoneNumber.Type == phoneNumberDto.Type)
-                                  ?? throw new PhoneNumberDoesntExistException(phoneNumberDto.Type);
+        var phoneNumberToUpdate = person.PhoneNumbers.Find(phoneNumber => phoneNumber.Type == phoneNumberDto.Type);
+
+        if (phoneNumberToUpdate is null)
+        {
+            person.PhoneNumbers.Add(phoneNumberDto.Adapt<PhoneNumber>());
+            return;
+        }
 
         phoneNumberToUpdate.Number = phoneNumberDto.Number;
-        phoneNumberToUpdate.CountryCode = phoneNumberDto.CountryCode;
-        phoneNumberToUpdate.AreaCode = phoneNumberDto.AreaCode;
 
         logger.LogInformation("{PropertyName} of type {Type} is updated", nameof(Person.PhoneNumbers)
             , phoneNumberToUpdate.Type);

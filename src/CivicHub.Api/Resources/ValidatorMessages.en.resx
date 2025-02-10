@@ -83,4 +83,7 @@
     <data name="InvalidFileType" xml:space="preserve">
         <value>Invalid file type. Only .png is allowed</value>
     </data>
+    <data name="PhoneNumbersTypesMustBeUnique" xml:space="preserve">
+        <value>Phone number types must be unique</value>
+    </data>
 </root>

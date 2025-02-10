@@ -16,13 +16,8 @@ public class GeneralMappings : IRegister
             .Map(dest => dest.FullName, src => ConvertToFullName(src.FirstName, src.LastName));
         
         config.NewConfig<City, CityResponse>();
-
-        config.NewConfig<PhoneNumber, PhoneNumberResponse>()
-            .Map(dest => dest.FullNumber, src => ConvertToFullPhoneNumber(src));
     }
     
     private static string ConvertToFullName(string firstName, string lastName) => $"{firstName} {lastName}";
-    
-    private static string ConvertToFullPhoneNumber(PhoneNumber phoneNumber)
-        => $"+({phoneNumber.CountryCode}) {phoneNumber.AreaCode} {phoneNumber.Number}";
+
 }

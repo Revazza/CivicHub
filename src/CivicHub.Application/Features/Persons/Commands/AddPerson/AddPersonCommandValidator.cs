@@ -20,7 +20,7 @@ public class AddPersonCommandValidator : AbstractValidator<AddPersonCommand>
         RuleFor(person => person)
             .Must(person => person.FirstName.HasMatchingLanguageWith(person.LastName))
             .WithMessage(ValidatorMessagesKeys.FirstAndLastNameDontHaveMatchingLanguages);
-        
+
         RuleFor(person => person.PersonalNumber)
             .NotNull()
             .SetValidator(new PersonalNumberValidator());
@@ -28,18 +28,21 @@ public class AddPersonCommandValidator : AbstractValidator<AddPersonCommand>
         RuleFor(person => person.Gender)
             .NotNull()
             .SetValidator(new GenderValidator());
-        
+
         RuleFor(person => person.BirthDate)
             .NotNull()
             .SetValidator(new AgeValidator());
-        
+
         RuleFor(person => person.CityCode)
             .NotNull()
             .SetValidator(new CityCodeValidator());
 
         RuleFor(person => person.PhoneNumbers)
-            .NotEmpty();
-        
+            .NotEmpty()
+            .Must(phoneNumbers => phoneNumbers.IsNotNullOrEmpty() &&
+                                  phoneNumbers.Select(p => p.Type).Distinct().Count() == phoneNumbers.Count)
+            .WithMessage(ValidatorMessagesKeys.PhoneNumbersTypesMustBeUnique);
+
         RuleForEach(person => person.PhoneNumbers)
             .NotEmpty()
             .SetValidator(new PhoneNumberDtoValidator());

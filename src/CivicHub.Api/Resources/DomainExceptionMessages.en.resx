@@ -32,4 +32,7 @@
     <data name="PersonConnectionAlreadyExists" xml:space="preserve">
         <value>Connection '{0}' between persons already exist</value>
     </data>
+    <data name="PhoneNumberDoesntExist" xml:space="preserve">
+        <value>Phone number by type {0} doesn't exist</value>
+    </data>
 </root>

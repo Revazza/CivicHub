@@ -12,6 +12,7 @@ public class Mappings : IRegister
         config
             .NewConfig<Person, GetFullInformationResponse>()
             .Map(dest => dest.FullName, src => ConvertToFullName(src.FirstName, src.LastName))
+            .Map(dest => dest.BirthDate,src => src.BirthDate.ToLongDateString())
             .Map(dest => dest.City, src => src.City.Adapt<CityResponse>())
             .Map(dest => dest.PhoneNumbers, src => src.PhoneNumbers.Adapt<List<PhoneNumberResponse>>())
             .Map(dest => dest.Connections, src => ConvertToConnectionList(src.Connections, src.ConnectedTo));

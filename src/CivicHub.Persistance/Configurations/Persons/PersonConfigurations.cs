@@ -1,5 +1,7 @@
+using CivicHub.Domain.Cities;
 using CivicHub.Domain.Persons;
 using CivicHub.Domain.Persons.ValueObjects.PhoneNumbers;
+using CivicHub.Persistance.Constants;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,29 +19,28 @@ public class PersonConfigurations : IEntityTypeConfiguration<Person>
         builder.Property(x => x.FirstName)
             .HasAnnotation(MinLengthAnnotation, PersonConstraints.FirstNameMinLength)
             .HasMaxLength(PersonConstraints.FirstNameMaxLength)
+            .UseCollation(DatabaseCollations.CaseInsensitiveCollation)
             .IsRequired();
 
         builder.Property(x => x.LastName)
             .HasAnnotation(MinLengthAnnotation, PersonConstraints.LastNameMinLength)
             .HasMaxLength(PersonConstraints.LastNameMaxLength)
+            .UseCollation(DatabaseCollations.CaseInsensitiveCollation)
             .IsRequired();
 
         builder.Property(x => x.PersonalNumber)
             .HasMaxLength(PersonConstraints.PersonalNumberLength)
             .IsRequired();
 
+        builder.Property(x => x.CityCode)
+            .HasMaxLength(CityConstraints.MaxCityCodeLength)
+            .UseCollation(DatabaseCollations.CaseInsensitiveCollation)
+            .IsRequired();
+
         builder.HasIndex(x => x.PersonalNumber).IsUnique();
 
         builder.OwnsMany(x => x.PhoneNumbers, phone =>
         {
-            phone.Property(p => p.CountryCode)
-                .HasMaxLength(PhoneNumberConstraints.MaxCountryCodeLength)
-                .IsRequired();
-            
-            phone.Property(p => p.AreaCode)
-                .HasMaxLength(PhoneNumberConstraints.MaxAreaCodeLength)
-                .IsRequired();
-            
             phone.Property(p => p.Number)
                 .HasMaxLength(PhoneNumberConstraints.MaxNumberLength)
                 .IsRequired();

@@ -35,6 +35,11 @@ public class UpdatePersonCommandValidator : AbstractValidator<UpdatePersonComman
             .SetValidator(new CityCodeValidator())
             .When(person => person.CityCode.IsNotNullOrEmpty());
 
+        RuleFor(person => person.PhoneNumbers)
+            .Must(phoneNumbers => phoneNumbers.Select(p => p.Type).Distinct().Count() == phoneNumbers.Count)
+            .WithMessage(ValidatorMessagesKeys.PhoneNumbersTypesMustBeUnique)
+            .When(person => person.PhoneNumbers.IsNotNullOrEmpty());
+        
         RuleForEach(person => person.PhoneNumbers)
             .SetValidator(new PhoneNumberDtoValidator())
             .When(person => person.PhoneNumbers.IsNotNullOrEmpty());
