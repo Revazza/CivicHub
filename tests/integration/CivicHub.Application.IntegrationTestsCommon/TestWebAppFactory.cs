@@ -17,8 +17,7 @@ public class TestWebAppFactory(string connectionString) : WebApplicationFactory<
             services.RemoveAll<DbContextOptions<CivicHubContext>>();
 
             services.AddDbContext<CivicHubContext>(options =>
-                options.UseSqlServer(connectionString, 
-                    sqlOptions => sqlOptions.MigrationsHistoryTable("__EFMigrationsHistory", CivicHubContext.SchemaName)));
+                options.UseSqlServer(connectionString));
         });
     }
     
