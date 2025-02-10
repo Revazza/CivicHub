@@ -8,6 +8,7 @@ public class GetFullInformationResponse
     public long Id { get; set; }
     public string FullName { get; set; }
     public string PersonalNumber { get; set; }
+    public string PictureFullPath { get; set; }
     public Gender Gender { get; set; }
     public DateTime BirthDate { get; set; }
     public CityResponse City { get; set; }
