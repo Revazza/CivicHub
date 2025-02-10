@@ -4,6 +4,7 @@ using CivicHub.Application.Common.Extensions;
 using CivicHub.Application.Features.Persons.Commands.AddPerson;
 using CivicHub.Application.Features.Persons.Commands.Common.Dtos;
 using CivicHub.Application.IntegrationTestsCommon;
+using CivicHub.Application.IntegrationTestsCommon.Extensions;
 using CivicHub.Domain.Cities;
 using CivicHub.Domain.Persons.Enums;
 using Microsoft.EntityFrameworkCore;
@@ -23,10 +24,7 @@ public class AddPersonCommandHandlerTests : IntegrationTestBase
             .With(x => x.Number, "5555")
             .Create();
 
-        var city = Fixture.Build<City>()
-            .With(x => x.Code, "NY")
-            .With(x => x.Name, "New York")
-            .Create();
+        var city = Fixture.GenerateCity();
 
         _validCommandComposer = Fixture.Build<AddPersonCommand>()
             .With(x => x.FirstName, "DimItrI")

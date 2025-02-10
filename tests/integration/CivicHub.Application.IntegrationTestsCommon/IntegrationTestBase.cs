@@ -2,11 +2,8 @@ using AutoFixture;
 using CivicHub.Application.IntegrationTestsCommon.Components;
 using CivicHub.Persistance.Contexts.CivicHubContexts;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
-using Testcontainers.MsSql;
 
 namespace CivicHub.Application.IntegrationTestsCommon;
 
