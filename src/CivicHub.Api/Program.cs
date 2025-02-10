@@ -34,9 +34,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
-app.UseMiddleware<CultureMiddleware>();
+var supportedCultures = new[] { "en", "ka" };
+var localizationOptions = new RequestLocalizationOptions()
+    .SetDefaultCulture(supportedCultures[0])
+    .AddSupportedCultures(supportedCultures)
+    .AddSupportedUICultures(supportedCultures);
+app.UseRequestLocalization(localizationOptions);
 app.UseMiddleware<CorrelationMiddleware>();
+app.UseMiddleware<LanguageMiddleware>();
 app.UseMiddleware<GlobalExceptionLoggingMiddleware>();
 app.UseHttpsRedirection();
 app.MapControllers();
