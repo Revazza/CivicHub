@@ -29,11 +29,12 @@ public class UpdatePersonCommandHandlerTests : IntegrationTestBase
             .Create();
 
         var initialCity = Fixture.Build<City>()
-            .With(x => x.Code, "TB")
-            .With(x => x.Name, "Tbilisi")
+            .With(x => x.Code, "NY")
+            .With(x => x.Name, "New York")
             .Create();
 
         _existingPerson = Fixture.Build<Person>()
+            .Without(x => x.Id)
             .With(x => x.FirstName, "GeOrGe")
             .With(x => x.LastName, "SmItH")
             .With(x => x.PersonalNumber, "12345678900")
@@ -41,11 +42,13 @@ public class UpdatePersonCommandHandlerTests : IntegrationTestBase
             .With(x => x.Gender, Gender.Male)
             .With(x => x.BirthDate, DateTime.UtcNow.AddYears(-30))
             .With(x => x.PhoneNumbers, [initialPhoneNumber])
+            .Without(x => x.Connections)
+            .Without(x => x.ConnectedTo)
             .Create();
 
         var newCity = Fixture.Build<City>()
-            .With(x => x.Code, "BT")
-            .With(x => x.Name, "Batumi")
+            .With(x => x.Code, "LDN")
+            .With(x => x.Name, "London")
             .Create();
 
         var newPhoneNumber = Fixture

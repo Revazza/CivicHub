@@ -24,8 +24,8 @@ public class AddPersonCommandHandlerTests : IntegrationTestBase
             .Create();
 
         var city = Fixture.Build<City>()
-            .With(x => x.Code, "TB")
-            .With(x => x.Name, "Tbilisi")
+            .With(x => x.Code, "NY")
+            .With(x => x.Name, "New York")
             .Create();
 
         _validCommandComposer = Fixture.Build<AddPersonCommand>()
