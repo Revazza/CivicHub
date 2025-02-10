@@ -21,4 +21,16 @@
     <data name="PersonConnectionDoesntExist" xml:space="preserve">
         <value />
     </data>
+    <data name="PersonAlreadyExists" xml:space="preserve">
+        <value />
+    </data>
+    <data name="PersonDoesntExistByPersonalNumber" xml:space="preserve">
+        <value />
+    </data>
+    <data name="PersonDoesntExistById" xml:space="preserve">
+        <value />
+    </data>
+    <data name="PersonDoesntExistByIdAndOtherPersonId" xml:space="preserve">
+        <value />
+    </data>
 </root>

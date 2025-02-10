@@ -14,4 +14,22 @@
     <data name="PersonConnectionDoesntExist" xml:space="preserve">
         <value>Person connection by id {0} doesn't exist</value>
     </data>
+    <data name="PersonAlreadyExists" xml:space="preserve">
+        <value>Person already exists by given personal number {0}</value>
+    </data>
+    <data name="PersonDoesntExistByPersonalNumber" xml:space="preserve">
+        <value>Person doesn't exist by personal number {0}</value>
+    </data>
+    <data name="PersonDoesntExistById" xml:space="preserve">
+        <value>Person doesn't exist by id {0}</value>
+    </data>
+    <data name="PersonDoesntExistByIdAndOtherPersonId" xml:space="preserve">
+        <value>One of the person or both doesn't exist person id {0}, other person id {1}</value>
+    </data>
+    <data name="CityDoesntExist" xml:space="preserve">
+        <value>City doesn't exist by city code {0}</value>
+    </data>
+    <data name="PersonConnectionAlreadyExists" xml:space="preserve">
+        <value>Connection '{0}' between persons already exist</value>
+    </data>
 </root>

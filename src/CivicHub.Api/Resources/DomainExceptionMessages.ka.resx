@@ -14,4 +14,22 @@
     <data name="PersonConnectionDoesntExist" xml:space="preserve">
         <value>ფიზიკური პირის კავშირი იდენთიფიკატორით {0} არ არსებობს</value>
     </data>
+    <data name="PersonAlreadyExists" xml:space="preserve">
+        <value>ფიზიკური პირი პირადი ნომრით {0} უკვე არსებობს</value>
+    </data>
+    <data name="PersonDoesntExistByPersonalNumber" xml:space="preserve">
+        <value>ფიზიკური პირი პირადი ნომრით {0} არ არსებობს</value>
+    </data>
+    <data name="PersonDoesntExistById" xml:space="preserve">
+        <value>ფიზიკური პირი იდენთიფიკატორით {0} არ არსებობს</value>
+    </data>
+    <data name="PersonDoesntExistByIdAndOtherPersonId" xml:space="preserve">
+        <value>ფიზიკური პირი იდენთიფიკატორით {0} ან ფიზიკური პირი იდენთიფიკატორით {1} არ არსებობს</value>
+    </data>
+    <data name="CityDoesntExist" xml:space="preserve">
+        <value>ქალაქი კოდით {0} არ არსებობს</value>
+    </data>
+    <data name="PersonConnectionAlreadyExists" xml:space="preserve">
+        <value>კავშირი '{0}' ფიზიკურ პირებს შორის უკვე არსებობს</value>
+    </data>
 </root>

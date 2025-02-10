@@ -1,11 +1,12 @@
 using CivicHub.Domain.Common.Exceptions;
+using CivicHub.Domain.Common.Localization;
 
 namespace CivicHub.Domain.Persons.Entities.PersonConnections.Exceptions;
 
 public class PersonConnectionExistsException : DomainException
 {
-    public PersonConnectionExistsException(long personId, long targetPersonId) : base(
-        $"Connection between {personId} and {targetPersonId} already exists")
+    public PersonConnectionExistsException(string connectionType) : base(
+        DomainExceptionMessagesKeys.PersonConnectionAlreadyExists, connectionType)
     {
     }
 }

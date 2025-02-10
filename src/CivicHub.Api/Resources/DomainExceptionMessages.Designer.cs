@@ -62,9 +62,45 @@ namespace CivicHub.Api.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string PersonAlreadyExists {
+            get {
+                return ResourceManager.GetString("PersonAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string PersonConnectionDoesntExist {
             get {
                 return ResourceManager.GetString("PersonConnectionDoesntExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string PersonDoesntExistById {
+            get {
+                return ResourceManager.GetString("PersonDoesntExistById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string PersonDoesntExistByIdAndOtherPersonId {
+            get {
+                return ResourceManager.GetString("PersonDoesntExistByIdAndOtherPersonId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string PersonDoesntExistByPersonalNumber {
+            get {
+                return ResourceManager.GetString("PersonDoesntExistByPersonalNumber", resourceCulture);
             }
         }
     }
