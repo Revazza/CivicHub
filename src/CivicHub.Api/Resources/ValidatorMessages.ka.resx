@@ -1,0 +1,86 @@
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="PersonIdCannotMatchAnother" xml:space="preserve">
+        <value>ფიზიკური პირის იდენთიფიკატორი არ უნდა იყოს ტოლი მეორე ფიზიკური პირის იდენთიფიკატორის</value>
+    </data>
+    <data name="MustBeEnglish" xml:space="preserve">
+        <value>{0} უნდა იყოს ინგლისური</value>
+    </data>
+    <data name="MustBeEnglishOrGeorgian" xml:space="preserve">
+        <value>{0} უნდა იყოს ინგლისური ან ქართული</value>
+    </data>
+    <data name="MustBeOneWord" xml:space="preserve">
+        <value>{0} უნდა იყოს ერთი სიტყვა</value>
+    </data>
+    <data name="MustContainOnlyDigits" xml:space="preserve">
+        <value>{0} უნდა შეიცავდეს მხოლოდ ციფრებს</value>
+    </data>
+    <data name="FirstName" xml:space="preserve">
+        <value>სახელი</value>
+    </data>
+    <data name="LastName" xml:space="preserve">
+        <value>გვარი</value>
+    </data>
+    <data name="CityCode" xml:space="preserve">
+        <value>ქალაქის კოდი</value>
+    </data>
+    <data name="PhoneNumber" xml:space="preserve">
+        <value>ტელეფონის ნომერი</value>
+    </data>
+    <data name="Age" xml:space="preserve">
+        <value>ასაკი</value>
+    </data>
+    <data name="AreaCode" xml:space="preserve">
+        <value>სატელეფონო კოდი</value>
+    </data>
+    <data name="CountryCode" xml:space="preserve">
+        <value>ქვეყნის კოდი</value>
+    </data>
+    <data name="PersonalNumber" xml:space="preserve">
+        <value>პირადი ნომერი</value>
+    </data>
+    <data name="GenderMustBeSpecified" xml:space="preserve">
+        <value>სქესის არჩევა სავალდებულოა</value>
+    </data>
+    <data name="Gender" xml:space="preserve">
+        <value>სქესი</value>
+    </data>
+    <data name="MustBeAdult" xml:space="preserve">
+        <value>უნდა იყოს 18 წელს გადაცილებული </value>
+    </data>
+    <data name="MagicNumberEntered" xml:space="preserve">
+        <value>არა რეალური ციფრია შეყვანილი</value>
+    </data>
+    <data name="PhoneType" xml:space="preserve">
+        <value>ტელეფონის ტიპი</value>
+    </data>
+    <data name="FirstAndLastNameDontHaveMatchingLanguages" xml:space="preserve">
+        <value>სახელი და გვარი ერთ ენაზე უნდა იყოს შეყვანილი</value>
+    </data>
+    <data name="PersonId" xml:space="preserve">
+        <value>ფიზიკური პირის იდენთიფიკატორი</value>
+    </data>
+    <data name="PageSize" xml:space="preserve">
+        <value>გვერდის სიდიდე</value>
+    </data>
+    <data name="PageNumber" xml:space="preserve">
+        <value>გვერდის ნომერი</value>
+    </data>
+    <data name="FileSizeExceeded" xml:space="preserve">
+        <value>ფაილის სიდიდე არ უნდა აღემატებოდეს {0} MB</value>
+    </data>
+    <data name="InvalidFileType" xml:space="preserve">
+        <value>არა ვალიდური ფაილის ტიპი. მხოლოდ .png არის ვალიდური</value>
+    </data>
+</root>

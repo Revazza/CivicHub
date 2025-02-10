@@ -55,7 +55,7 @@ public class AddConnectionCommandHandler(IUnitOfWork unitOfWork, ILogger<AddConn
 
         if (exists)
         {
-            throw new PersonConnectionExistsException(request.PersonId, request.OtherPersonId);
+            throw new PersonConnectionExistsException(request.ConnectionType);
         }
     }
 }

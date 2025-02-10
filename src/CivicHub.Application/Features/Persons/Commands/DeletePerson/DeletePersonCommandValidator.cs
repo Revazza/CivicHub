@@ -1,4 +1,3 @@
-using CivicHub.Application.Features.Persons.Commands.Common.Validators;
 using FluentValidation;
 
 namespace CivicHub.Application.Features.Persons.Commands.DeletePerson;

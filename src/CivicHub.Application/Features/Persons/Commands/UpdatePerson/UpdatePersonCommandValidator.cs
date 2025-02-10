@@ -1,4 +1,5 @@
 using CivicHub.Application.Common.Extensions;
+using CivicHub.Application.Common.Localization;
 using CivicHub.Application.Features.Persons.Commands.Common.Validators;
 using FluentValidation;
 
@@ -15,6 +16,12 @@ public class UpdatePersonCommandValidator : AbstractValidator<UpdatePersonComman
         RuleFor(person => person.LastName)
             .SetValidator(new LastNameValidator())
             .When(person => person.LastName.IsNotNullOrEmpty());
+
+        RuleFor(person => person)
+            .Must(person => person.FirstName.HasMatchingLanguageWith(person.LastName))
+            .WithMessage(ValidatorMessagesKeys.FirstAndLastNameDontHaveMatchingLanguages)
+            .When(person => person.FirstName.IsNotNullOrEmpty() && person.LastName.IsNotNullOrEmpty());
+
 
         RuleFor(person => person.PersonalNumber)
             .SetValidator(new PersonalNumberValidator())

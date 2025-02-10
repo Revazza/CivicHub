@@ -129,7 +129,7 @@ public class UpdatePersonCommandValidatorTests
         var result = _validator.TestValidate(command);
 
         // Assert
-        result.ShouldHaveValidationErrorFor(x => x.BirthDate);
+        result.ShouldHaveValidationErrorFor("BirthDate.Age");
     }
 
     [TestCase("o k")]
@@ -150,7 +150,7 @@ public class UpdatePersonCommandValidatorTests
         var result = _validator.TestValidate(command);
 
         // Assert
-        result.ShouldHaveValidationErrorFor(x => x.CityCode);
+        result.ShouldHaveValidationErrorFor("CityCode.CityCode");
     }
 
     [TestCase("")]

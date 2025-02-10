@@ -15,7 +15,7 @@ public class AddConnectionCommandValidator : AbstractValidator<AddConnectionComm
 
         RuleFor(request => request)
             .Must(request => request.PersonId != request.OtherPersonId)
-            .WithMessage("PersonId must not be equal to other personId");
+            .WithMessage("PersonIdCannotMatchAnother");
 
         RuleFor(request => request.ConnectionType)
             .NotEmpty()

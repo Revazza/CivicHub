@@ -20,7 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services
-    .AddApi()
+    .AddApi(builder.Configuration)
     .AddApplication()
     .AddInfrastructure()
     .AddPersistance(builder.Configuration);
@@ -33,7 +33,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.SetupAndUseRequestLocalization();
 app.UseMiddleware<CorrelationMiddleware>();
+app.UseMiddleware<LanguageMiddleware>();
 app.UseMiddleware<GlobalExceptionLoggingMiddleware>();
 app.UseHttpsRedirection();
 app.MapControllers();

@@ -1,0 +1,86 @@
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="PersonIdCannotMatchAnother" xml:space="preserve">
+        <value>PersonId must not be equal to other personId</value>
+    </data>
+    <data name="MustBeEnglish" xml:space="preserve">
+        <value>{0} Must be English</value>
+    </data>
+    <data name="MustBeEnglishOrGeorgian" xml:space="preserve">
+        <value>{0} Must be English or Georgian</value>
+    </data>
+    <data name="MustBeOneWord" xml:space="preserve">
+        <value>{0} Must be one word</value>
+    </data>
+    <data name="MustContainOnlyDigits" xml:space="preserve">
+        <value>{0} Must contain only digits</value>
+    </data>
+    <data name="FirstName" xml:space="preserve">
+        <value>First name</value>
+    </data>
+    <data name="LastName" xml:space="preserve">
+        <value>Last name</value>
+    </data>
+    <data name="CityCode" xml:space="preserve">
+        <value>City code</value>
+    </data>
+    <data name="PhoneNumber" xml:space="preserve">
+        <value>Phone number</value>
+    </data>
+    <data name="Age" xml:space="preserve">
+        <value>Age</value>
+    </data>
+    <data name="AreaCode" xml:space="preserve">
+        <value>Area code</value>
+    </data>
+    <data name="CountryCode" xml:space="preserve">
+        <value>Country code</value>
+    </data>
+    <data name="PersonalNumber" xml:space="preserve">
+        <value>Personal number</value>
+    </data>
+    <data name="GenderMustBeSpecified" xml:space="preserve">
+        <value>Gender must be specified</value>
+    </data>
+    <data name="Gender" xml:space="preserve">
+        <value>Gender</value>
+    </data>
+    <data name="MustBeAdult" xml:space="preserve">
+        <value>Must be over 18 years old</value>
+    </data>
+    <data name="MagicNumberEntered" xml:space="preserve">
+        <value>Magic number entered</value>
+    </data>
+    <data name="PhoneType" xml:space="preserve">
+        <value>Phone type</value>
+    </data>
+    <data name="FirstAndLastNameDontHaveMatchingLanguages" xml:space="preserve">
+        <value>First name and last name must be same language</value>
+    </data>
+    <data name="PersonId" xml:space="preserve">
+        <value>Person id</value>
+    </data>
+    <data name="PageSize" xml:space="preserve">
+        <value>Page size</value>
+    </data>
+    <data name="PageNumber" xml:space="preserve">
+        <value>Page number</value>
+    </data>
+    <data name="FileSizeExceeded" xml:space="preserve">
+        <value>File size must not exceed {0} MB</value>
+    </data>
+    <data name="InvalidFileType" xml:space="preserve">
+        <value>Invalid file type. Only .png is allowed</value>
+    </data>
+</root>

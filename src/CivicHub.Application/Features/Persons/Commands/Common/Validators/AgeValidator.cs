@@ -1,3 +1,4 @@
+using CivicHub.Application.Common.Localization;
 using FluentValidation;
 
 namespace CivicHub.Application.Features.Persons.Commands.Common.Validators;
@@ -11,9 +12,10 @@ public class AgeValidator : AbstractValidator<DateTime>
     {
         RuleFor(birthDate => birthDate)
             .Must(IsAdult)
-            .WithMessage("Must be at least 18 years old")
+            .WithName(ValidatorMessagesKeys.Age)
+            .WithMessage(ValidatorMessagesKeys.MustBeAdult)
             .Must(IsMagicAge)
-            .WithMessage("Magic age entered");
+            .WithMessage(ValidatorMessagesKeys.MagicNumberEntered);
     }
 
     private static bool IsAdult(DateTime birthDate) => birthDate <= DateTime.UtcNow.AddYears(-ValidAge);
