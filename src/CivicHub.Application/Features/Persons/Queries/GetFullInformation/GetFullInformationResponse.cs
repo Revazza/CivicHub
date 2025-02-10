@@ -10,7 +10,7 @@ public class GetFullInformationResponse
     public string PersonalNumber { get; set; }
     public string PictureFullPath { get; set; }
     public Gender Gender { get; set; }
-    public DateTime BirthDate { get; set; }
+    public string BirthDate { get; set; }
     public CityResponse City { get; set; }
     public List<PhoneNumberResponse> PhoneNumbers { get; set; }
     public List<PersonConnectionResponse> Connections { get; set; }
