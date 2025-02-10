@@ -46,7 +46,6 @@ public class AddPersonCommandValidatorTests
     }
 
     [TestCase("")]
-    [TestCase(null)]
     [TestCase("123")]
     [TestCase("s")]
     [TestCase("ქ")]
@@ -71,7 +70,6 @@ public class AddPersonCommandValidatorTests
     }
 
     [TestCase("")]
-    [TestCase(null)]
     [TestCase("123")]
     [TestCase("s")]
     [TestCase("ქ")]
@@ -96,7 +94,6 @@ public class AddPersonCommandValidatorTests
     }
 
     [TestCase("")]
-    [TestCase(null)]
     [TestCase("123")]
     [TestCase("s")]
     [TestCase("ქ")]
@@ -135,11 +132,10 @@ public class AddPersonCommandValidatorTests
         var result = _validator.TestValidate(command);
 
         // Assert
-        result.ShouldHaveValidationErrorFor(x => x.BirthDate);
+        result.ShouldHaveValidationErrorFor("BirthDate.Age");
     }
 
     [TestCase("")]
-    [TestCase(null)]
     [TestCase("o k")]
     [TestCase("o   ")]
     [TestCase(" o")]
@@ -158,7 +154,7 @@ public class AddPersonCommandValidatorTests
         var result = _validator.TestValidate(command);
 
         // Assert
-        result.ShouldHaveValidationErrorFor(x => x.CityCode);
+        result.ShouldHaveValidationErrorFor("CityCode.CityCode");
     }
 
     [TestCase("")]

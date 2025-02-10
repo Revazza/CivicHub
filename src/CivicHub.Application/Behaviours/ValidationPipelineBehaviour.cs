@@ -66,7 +66,7 @@ public class ValidationPipelineBehaviour<TRequest, TResponse>(
     private static string GetPropertyName(ValidationFailure validationFailure)
     {
         const string key = "PropertyName";
-        var formattedName = validationFailure.FormattedMessagePlaceholderValues[key];
+        validationFailure.FormattedMessagePlaceholderValues.TryGetValue(key, out var formattedName);
         if (formattedName is not null)
         {
             return (string)formattedName;

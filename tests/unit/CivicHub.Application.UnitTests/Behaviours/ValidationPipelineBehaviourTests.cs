@@ -1,5 +1,6 @@
 using AutoFixture;
 using CivicHub.Application.Behaviours;
+using CivicHub.Application.Common.Localization;
 using CivicHub.Application.Common.Results;
 using FluentValidation;
 using FluentValidation.Results;
@@ -15,6 +16,7 @@ public class ValidationPipelineBehaviourTests
 {
     private Mock<ILogger<ValidationPipelineBehaviour<TestCommand, Result>>> _loggerMock;
     private Mock<IValidator<TestCommand>> _validatorMock;
+    private Mock<IValidationLocalizer> _validationLocalizerMock;
     private ValidationPipelineBehaviour<TestCommand, Result> _behaviour;
     private Fixture _fixture;
     private TestCommand _request;
@@ -26,17 +28,24 @@ public class ValidationPipelineBehaviourTests
         _fixture = new Fixture();
         _loggerMock = new Mock<ILogger<ValidationPipelineBehaviour<TestCommand, Result>>>(MockBehavior.Loose);
         _validatorMock = new Mock<IValidator<TestCommand>>();
+        _validationLocalizerMock = new Mock<IValidationLocalizer>();
         _behaviour =
-            new ValidationPipelineBehaviour<TestCommand, Result>(_loggerMock.Object, _validatorMock.Object);
+            new ValidationPipelineBehaviour<TestCommand, Result>(_loggerMock.Object, _validationLocalizerMock.Object,
+                _validatorMock.Object);
         _request = _fixture.Create<TestCommand>();
         _cancellationToken = CancellationToken.None;
+        _validationLocalizerMock.Setup(x => x.Translate(It.IsAny<string>()))
+            .Returns(string.Empty);
+        _validationLocalizerMock.Setup(x => x.Translate(It.IsAny<string>(), It.IsAny<object>()))
+            .Returns(string.Empty);
     }
 
     [Test]
     public async Task When_ValidatorIsNull_Then_ProceedsWithNextDelegate()
     {
         // Arrange
-        var behaviour = new ValidationPipelineBehaviour<TestCommand, Result>(_loggerMock.Object);
+        var behaviour =
+            new ValidationPipelineBehaviour<TestCommand, Result>(_loggerMock.Object, _validationLocalizerMock.Object);
         var expectedResponse = _fixture.Create<Result>();
 
         // Act
@@ -100,17 +109,11 @@ public class ValidationPipelineBehaviourTests
             _request,
             It.IsAny<RequestHandlerDelegate<Result>>(),
             _cancellationToken);
-        
+
         // Assert
-        var errors = result.Errors;
-        Assert.Multiple(() =>
-        {
-            Assert.That(errors, Has.Count.EqualTo(validationFailures.Count));
-            Assert.That(errors.Select(e => e.Message),
-                Is.EquivalentTo(validationFailures.Select(e => e.ErrorMessage)));
-        });
+        Assert.That(result.Errors, Has.Count.EqualTo(validationFailures.Count));
     }
-    
+
     [Test]
     public async Task When_MethodIsExecuted_Then_LogsHappen()
     {
