@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "integration", "integration"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CivicHub.Application.IntegrationTests", "tests\integration\CivicHub.Application.IntegrationTests\CivicHub.Application.IntegrationTests.csproj", "{863E747E-9292-46F0-89BB-F38FA8887010}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CivicHub.Application.IntegrationTestsCommon", "tests\integration\CivicHub.Application.IntegrationTestsCommon\CivicHub.Application.IntegrationTestsCommon.csproj", "{D3F926CF-2AB0-4AE0-804B-957A6625F143}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{863E747E-9292-46F0-89BB-F38FA8887010}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{863E747E-9292-46F0-89BB-F38FA8887010}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{863E747E-9292-46F0-89BB-F38FA8887010}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3F926CF-2AB0-4AE0-804B-957A6625F143}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3F926CF-2AB0-4AE0-804B-957A6625F143}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3F926CF-2AB0-4AE0-804B-957A6625F143}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3F926CF-2AB0-4AE0-804B-957A6625F143}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{81D805B0-860D-4374-A4E3-DAB7518A163D} = {71A1F94F-DFFA-4BCC-9025-45256F00054F}
@@ -68,5 +74,6 @@ Global
 		{F52F88CF-466D-48CE-BF26-CE9B28FDF291} = {7014D8AF-ADEA-4356-A8E0-5009484211B7}
 		{6B0A5397-A9D9-4B54-9EF6-3053DCEFB1F7} = {20AF4AB6-6BFF-4715-9443-DAB79ABFB1DF}
 		{863E747E-9292-46F0-89BB-F38FA8887010} = {6B0A5397-A9D9-4B54-9EF6-3053DCEFB1F7}
+		{D3F926CF-2AB0-4AE0-804B-957A6625F143} = {6B0A5397-A9D9-4B54-9EF6-3053DCEFB1F7}
 	EndGlobalSection
 EndGlobal

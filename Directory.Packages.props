@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!--Common-->
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.3" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.3" />
