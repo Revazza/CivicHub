@@ -81,7 +81,7 @@ public class PersonController(ISender mediator) : ControllerBase
     [HttpPost("picture")]
     public async Task<IActionResult> UploadPersonPicture(
         long personId,
-        [FromForm] IFormFile picture,
+        IFormFile picture,
         CancellationToken cancellationToken = default)
     {
         var result = await mediator.Send(new UploadPersonPictureCommand(personId, picture), cancellationToken);
