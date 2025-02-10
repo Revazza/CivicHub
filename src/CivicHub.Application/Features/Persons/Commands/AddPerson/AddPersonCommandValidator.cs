@@ -8,7 +8,7 @@ public class AddPersonCommandValidator : AbstractValidator<AddPersonCommand>
     public AddPersonCommandValidator()
     {
         RuleFor(person => person.FirstName)
-            .NotEmpty()
+            .NotNull()
             .SetValidator(new FirstNameValidator());
 
         RuleFor(person => person.LastName)

@@ -14,4 +14,40 @@
     <data name="PersonIdCannotMatchAnother" xml:space="preserve">
         <value>ფიზიკური პირის იდენთიფიკატორი არ უნდა იყოს ტოლი მეორე ფიზიკური პირის იდენთიფიკატორის</value>
     </data>
+    <data name="MustBeEnglish" xml:space="preserve">
+        <value>{0} უნდა იყოს ინგლისური</value>
+    </data>
+    <data name="MustBeEnglishOrGeorgian" xml:space="preserve">
+        <value>{0} უნდა იყოს ინგლისური ან ქართული</value>
+    </data>
+    <data name="MustBeOneWord" xml:space="preserve">
+        <value>{0} უნდა იყოს ერთი სიტყვა</value>
+    </data>
+    <data name="MustContainOnlyDigits" xml:space="preserve">
+        <value>{0} უნდა შეიცავდეს მხოლოდ ციფრებს</value>
+    </data>
+    <data name="FirstName" xml:space="preserve">
+        <value>სახელი</value>
+    </data>
+    <data name="LastName" xml:space="preserve">
+        <value>გვარი</value>
+    </data>
+    <data name="CityCode" xml:space="preserve">
+        <value>ქალაქის კოდი</value>
+    </data>
+    <data name="PhoneNumber" xml:space="preserve">
+        <value>ტელეფონის ნომერი</value>
+    </data>
+    <data name="Age" xml:space="preserve">
+        <value>ასაკი</value>
+    </data>
+    <data name="AreaCode" xml:space="preserve">
+        <value>სატელეფონო კოდი</value>
+    </data>
+    <data name="CountryCode" xml:space="preserve">
+        <value>ქვეყნის კოდი</value>
+    </data>
+    <data name="PersonalNumber" xml:space="preserve">
+        <value>პირადი ნომერი</value>
+    </data>
 </root>

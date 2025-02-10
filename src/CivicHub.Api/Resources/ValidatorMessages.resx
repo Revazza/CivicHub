@@ -21,4 +21,40 @@
     <data name="PersonIdCannotMatchAnother" xml:space="preserve">
         <value />
     </data>
+    <data name="MustBeEnglish" xml:space="preserve">
+        <value />
+    </data>
+    <data name="MustBeEnglishOrGeorgian" xml:space="preserve">
+        <value />
+    </data>
+    <data name="MustBeOneWord" xml:space="preserve">
+        <value />
+    </data>
+    <data name="MustContainOnlyDigits" xml:space="preserve">
+        <value />
+    </data>
+    <data name="FirstName" xml:space="preserve">
+        <value />
+    </data>
+    <data name="LastName" xml:space="preserve">
+        <value />
+    </data>
+    <data name="CityCode" xml:space="preserve">
+        <value />
+    </data>
+    <data name="PhoneNumber" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Age" xml:space="preserve">
+        <value />
+    </data>
+    <data name="AreaCode" xml:space="preserve">
+        <value />
+    </data>
+    <data name="CountryCode" xml:space="preserve">
+        <value />
+    </data>
+    <data name="PersonalNumber" xml:space="preserve">
+        <value />
+    </data>
 </root>

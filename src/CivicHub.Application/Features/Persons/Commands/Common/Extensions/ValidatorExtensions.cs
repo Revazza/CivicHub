@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 using CivicHub.Application.Common.Extensions;
+using CivicHub.Application.Common.Localization;
 using FluentValidation;
 
 namespace CivicHub.Application.Features.Persons.Commands.Common.Extensions;
@@ -12,24 +13,24 @@ public static class ValidatorExtensions
     private const string OnlyDigitsPattern = @"^\d+$";
 
     public static IRuleBuilderOptions<T, string> MustBeEnglish<T>(
-        this IRuleBuilderOptions<T, string> ruleBuilder,string propertyName)
+        this IRuleBuilderOptions<T, string> ruleBuilder)
         => ruleBuilder.Must(input => Regex.IsMatch(input, EnglishPattern))
-            .WithMessage($"{propertyName} must be English");
+            .WithMessage(ValidatorMessagesKeys.MustBeEnglish);
 
     public static IRuleBuilderOptions<T, string> MustBeEnglishOrGeorgian<T>(
-        this IRuleBuilderOptions<T, string> ruleBuilder, string propertyName)
+        this IRuleBuilderOptions<T, string> ruleBuilder)
         => ruleBuilder.Must(input => Regex.IsMatch(input, EnglishOrGeorgianPattern))
-            .WithMessage($"{propertyName} must be English or Georgian");
+            .WithMessage(ValidatorMessagesKeys.MustBeEnglishOrGeorgian);
 
     public static IRuleBuilderOptions<T, string> MustBeOneWord<T>(
-        this IRuleBuilderOptions<T, string> ruleBuilder, string propertyName)
+        this IRuleBuilderOptions<T, string> ruleBuilder)
         => ruleBuilder.Must(HasExactlyOneWord)
-            .WithMessage($"{propertyName} should not be more than one word");
+            .WithMessage(ValidatorMessagesKeys.MustBeOneWord);
 
     public static IRuleBuilderOptions<T, string> MustContainOnlyDigits<T>(
-        this IRuleBuilderOptions<T, string> ruleBuilder, string propertyName)
+        this IRuleBuilderOptions<T, string> ruleBuilder)
         => ruleBuilder.Must(HasOnlyDigits)
-            .WithMessage($"{propertyName} should contain only digits");
+            .WithMessage(ValidatorMessagesKeys.MustContainOnlyDigits);
 
     private static bool HasExactlyOneWord(string input) => input.IsNotNullOrEmpty() && input.Split(Separator).Length == 1;
 
