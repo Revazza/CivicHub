@@ -4,7 +4,6 @@ using CivicHub.Api.Middlewares;
 using CivicHub.Application;
 using CivicHub.Infrastructure;
 using CivicHub.Persistance;
-using Microsoft.Extensions.Options;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,7 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services
-    .AddApi()
+    .AddApi(builder.Configuration)
     .AddApplication()
     .AddInfrastructure()
     .AddPersistance(builder.Configuration);
@@ -34,12 +33,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-var supportedCultures = new[] { "en", "ka" };
-var localizationOptions = new RequestLocalizationOptions()
-    .SetDefaultCulture(supportedCultures[0])
-    .AddSupportedCultures(supportedCultures)
-    .AddSupportedUICultures(supportedCultures);
-app.UseRequestLocalization(localizationOptions);
+app.SetupAndUseRequestLocalization();
 app.UseMiddleware<CorrelationMiddleware>();
 app.UseMiddleware<LanguageMiddleware>();
 app.UseMiddleware<GlobalExceptionLoggingMiddleware>();
