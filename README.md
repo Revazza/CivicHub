@@ -21,3 +21,15 @@ During the database update, two cities are automatically added to database
   Name: "Batumi"
 }
 ```
+
+## How to
+
+### Database creation
+Replace **CivicHubContext** connection string in **appsettings.json** with your database connection string
+
+Run command from the root of the app
+```
+dotnet ef database update --project src/CivicHub.Persistance --startup-project src/CivicHub.Api --connection "<Your connection string>"
+```
+### Testing an api
+In order to test apis you'll need to download [Postman](https://www.postman.com/downloads/)
